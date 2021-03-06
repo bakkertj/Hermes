@@ -11,6 +11,8 @@ import ArgumentParser
 var titaniumOption: String = ""
 var clioOption: String = ""
 var outputOption: String = ""
+var generateFilesOption: Bool = false;
+
 
 struct Hermes: ParsableCommand {
     @Argument(help: "directory to find the titanium CSV files.")
@@ -19,11 +21,14 @@ struct Hermes: ParsableCommand {
     var clioDirectory: String
     @Argument(help: "directory to output the penelope CSV files.")
     var outputDirectory: String
-
+    @Flag(inversion: .prefixedNo)
+    var generateFiles: Bool = true
+    
     mutating func run() throws {
-        titaniumOption  = self.titaniumDirectory
-        clioOption      = self.clioDirectory
-        outputOption    = self.outputDirectory
+        titaniumOption      = self.titaniumDirectory
+        clioOption          = self.clioDirectory
+        outputOption        = self.outputDirectory
+        generateFilesOption = self.generateFiles
     }
 }
 
@@ -41,16 +46,19 @@ clioDirectory.path     = clioOption
 outputDirectory.path   = outputOption
 
 
-getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-
-for file in titaniumFiles
+if ( generateFilesOption == true )
 {
-    print ( readCSV( fileName:file ) )
-}
-
-getFilesFromDirectory(directory:clioDirectory,      fileList:&clioFiles )
-
-for file in clioFiles
-{
-    generateClioDefines( fileName:file )
+    getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+    
+    for file in titaniumFiles
+    {
+        generateTitaniumDefines( fileName:file )
+    }
+    
+    getFilesFromDirectory(directory:clioDirectory,      fileList:&clioFiles )
+    
+    for file in clioFiles
+    {
+        generateClioDefines( fileName:file )
+    }
 }

@@ -42,7 +42,7 @@ func readCSV(fileName: URL) -> [[String]]
     {
         print("Error opening file \(fileName.path)")
     }
-  
+    
     var result: [[String]] = []
     let rows = data.components(separatedBy: "\n")
     var rowCount = 0;
@@ -56,7 +56,7 @@ func readCSV(fileName: URL) -> [[String]]
         }
         result.append(columns)
         //print (columns)
-       // print ("\n\n\n")
+        // print ("\n\n\n")
         rowCount += 1;
         
     }
@@ -74,7 +74,7 @@ func readClioCSV(fileName: URL) -> [[String]]
     {
         print("Error opening file \(fileName.path)")
     }
-  
+    
     var result: [[String]] = []
     let rows = data.components(separatedBy: "\n")
     for row in rows
@@ -90,9 +90,8 @@ func readClioCSV(fileName: URL) -> [[String]]
 
 func generateClioDefines(fileName: URL)
 {
-    var outputFile   = URLComponents()
     
-    outputFile.path = codePath + "clio.define"
+    var fileStreamer = FileStreamer( newFile : "clio.swift");
     
     var data : String = ""
     
@@ -104,7 +103,7 @@ func generateClioDefines(fileName: URL)
     {
         print("Error opening file \(fileName.path)")
     }
-  
+    
     var result: [[String]] = []
     let rows = data.components(separatedBy: "\n")
     var rowCount = 0;
@@ -116,24 +115,22 @@ func generateClioDefines(fileName: URL)
         {
             for entry in columns
             {
-                do {
-                    var fieldName = entry.replacingOccurrences(of: " ", with: "")
-                    fieldName = fieldName.replacingOccurrences(of: "\r", with: "")
-                    
-                    let output : String = "let CLIO_\(fieldName) = \(count)\n"
-                    print( output )
-                    
-                    try output.write(toFile: outputFile.path, atomically: true, encoding: String.Encoding.utf8)
-                    
-                } catch {
-                    print("Had an error opening \(outputFile.path)")
-                }
+                // Cleanup the field names that have bad characters
+                var fieldName = entry.replacingOccurrences(of: " ", with: "")
+                fieldName = fieldName.replacingOccurrences(of: "\r", with: "")
+                fieldName = fieldName.replacingOccurrences(of: ":", with: "")
+                fieldName = fieldName.replacingOccurrences(of: "?", with: "")
+                fieldName = fieldName.replacingOccurrences(of: "-", with: "")
+                
+                let output : String = "let CLIO_\(fieldName) = \(count)\n"
+                fileStreamer.write(output)
+                
+                
                 count += 1
             }
+            return
         }
         result.append(columns)
-        //print (columns)
-       // print ("\n\n\n")
         rowCount += 1;
         
     }

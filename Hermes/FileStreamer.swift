@@ -15,6 +15,7 @@ struct FileStreamer {
 
     init( newFile: String )
     {
+        print("Opening \(newFile)\n")
         self.providedFileName = "\(newFile)"
     }
     

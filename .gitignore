@@ -5,6 +5,13 @@
 ## User settings
 xcuserdata/
 
+.DS_Store
+
+clio
+titanium
+output
+clio.define
+
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
 *.xccheckout

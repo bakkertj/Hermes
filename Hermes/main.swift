@@ -62,3 +62,10 @@ if ( generateFilesOption == true )
         generateClioDefines( fileName:file )
     }
 }
+
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumCSV( fileName:file )
+}

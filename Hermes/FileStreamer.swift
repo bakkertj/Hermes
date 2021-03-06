@@ -29,7 +29,6 @@ struct FileStreamer {
     }()
 
     mutating func write(_ string: String) {
-        print(fileHandle?.description ?? "呵呵")
         fileHandle?.seekToEndOfFile()
         if let data = string.data(using: String.Encoding.utf8){
             fileHandle?.write(data)

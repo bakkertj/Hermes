@@ -52,5 +52,5 @@ getFilesFromDirectory(directory:clioDirectory,      fileList:&clioFiles )
 
 for file in clioFiles
 {
-    print ( readCSV( fileName:file ) )
+    generateClioDefines( fileName:file )
 }

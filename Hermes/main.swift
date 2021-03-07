@@ -41,7 +41,7 @@ var titaniumDirectory   = URLComponents()
 var clioDirectory       = URLComponents()
 var outputDirectory     = URLComponents()
 
-titaniumDirectory.path = titaniumOption
+
 clioDirectory.path     = clioOption
 outputDirectory.path   = outputOption
 
@@ -63,9 +63,18 @@ if ( generateFilesOption == true )
     }
 }
 
+titaniumDirectory.path = titaniumOption + "/ClientContact"
 getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
 
 for file in titaniumFiles
 {
     readTitaniumContactCSV( fileName:file )
+}
+
+titaniumDirectory.path = titaniumOption + "/Demographic"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumDemographicCSV( fileName:file )
 }

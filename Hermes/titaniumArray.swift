@@ -7,19 +7,19 @@ struct TitaniumClientContactHeader
     init()
     {
         TitaniumClientContactHeaderArray.append("c_clientid")
-        TitaniumClientContactHeaderArray.append("c_ss_number")
-        TitaniumClientContactHeaderArray.append("c_studentid")
-        TitaniumClientContactHeaderArray.append("c_fileno")
+        TitaniumClientContactHeaderArray.append("c_ss_number")  // drop
+        TitaniumClientContactHeaderArray.append("c_studentid")  // drop
+        TitaniumClientContactHeaderArray.append("c_fileno")     // drop
         TitaniumClientContactHeaderArray.append("c_firstname")
         TitaniumClientContactHeaderArray.append("c_middlename")
         TitaniumClientContactHeaderArray.append("c_lastname")
-        TitaniumClientContactHeaderArray.append("c_active")
-        TitaniumClientContactHeaderArray.append("c_regdate")
-        TitaniumClientContactHeaderArray.append("c_adddate")
-        TitaniumClientContactHeaderArray.append("c_editdate")
-        TitaniumClientContactHeaderArray.append("c_statustext")
+        TitaniumClientContactHeaderArray.append("c_active")     // drop
+        TitaniumClientContactHeaderArray.append("c_regdate")    // drop
+        TitaniumClientContactHeaderArray.append("c_adddate")    // drop
+        TitaniumClientContactHeaderArray.append("c_editdate")   // drop
+        TitaniumClientContactHeaderArray.append("c_statustext") // drop
         TitaniumClientContactHeaderArray.append("c_email")
-        TitaniumClientContactHeaderArray.append("c_oktoemail")
+        TitaniumClientContactHeaderArray.append("c_oktoemail")  // drop
         TitaniumClientContactHeaderArray.append("c_phone1")
         TitaniumClientContactHeaderArray.append("c_oktophone1")
         TitaniumClientContactHeaderArray.append("c_phone2")
@@ -31,7 +31,7 @@ struct TitaniumClientContactHeader
         TitaniumClientContactHeaderArray.append("c_oktohome")
         TitaniumClientContactHeaderArray.append("c_birthdate")
         TitaniumClientContactHeaderArray.append("c_comment")
-        TitaniumClientContactHeaderArray.append("c_fromweb")
+        TitaniumClientContactHeaderArray.append("c_fromweb") // drop
     }
 }
 

@@ -23,4 +23,18 @@ func isValidEmail(testStr:String) -> Bool {
     return result
 }
 
+extension String {
+    var bool: Bool? {
+        print("Trying \(self)\n")
+        switch self.lowercased() {
+        case "true", "t", "yes", "y":
+            return true
+        case "false", "f", "no", "n", "", "FALSE":
+            return false
+        default:
+            return true
+            //return nil
+        }
+    }
+}
 

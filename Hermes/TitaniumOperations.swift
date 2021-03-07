@@ -10,6 +10,12 @@ import Foundation
 func readTitaniumCSV(fileName: URL)
 {
     var data : String = ""
+    
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd"
+    dateFormatterGet.locale = Locale(identifier: "en_US")
+  
+   // print("\(dateFormatterGet.")
     do
     {
         data = try String(contentsOf: fileName, encoding: .utf8)
@@ -31,7 +37,24 @@ func readTitaniumCSV(fileName: URL)
         {
             let columns = row.components(separatedBy: ",")
             var contactEntry = TitaniumClientContact()
-            contactEntry.ClientID = Int(columns[0])!
+            contactEntry.ClientID   = Int(columns[TITANIUM_c_clientid])!
+            contactEntry.FirstName  = columns[TITANIUM_c_firstname]
+            contactEntry.MiddleName = columns[TITANIUM_c_middlename]
+            contactEntry.LastName   = columns[TITANIUM_c_lastname]
+            contactEntry.Email      = columns[TITANIUM_c_email]
+            contactEntry.OkToPhone1 = ( columns[TITANIUM_c_oktophone1] as NSString ).boolValue
+            contactEntry.OkToPhone2 = ( columns[TITANIUM_c_oktophone2] as NSString ).boolValue
+            contactEntry.OkToPhone3 = ( columns[TITANIUM_c_oktophone3] as NSString ).boolValue
+            contactEntry.Phone1     = columns[TITANIUM_c_phone1]
+            contactEntry.Phone2     = columns[TITANIUM_c_phone2]
+            contactEntry.Phone3     = columns[TITANIUM_c_phone3]
+            contactEntry.Address1   = columns[TITANIUM_c_address1]
+            contactEntry.Address2   = columns[TITANIUM_c_address2]
+            contactEntry.OkToHome   = ( columns[TITANIUM_c_oktohome] as NSString ).boolValue
+            
+            let tempDate : Date = dateFormatterGet.date(from: columns[TITANIUM_c_birthdate] )!
+            contactEntry.BirthDate  = tempDate
+            contactEntry.Comment    = columns[TITANIUM_c_comment]
             
             result.append(columns)
             print (columns)

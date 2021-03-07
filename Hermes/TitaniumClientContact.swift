@@ -22,13 +22,17 @@ struct TitaniumClientContact
     var EditDate : Date
     var StatusExt : String
     var Email : String
+    var OkToPhone1 : Bool
     var Phone1 : String
+    var OkToPhone2 : Bool
     var Phone2 : String
+    var OkToPhone3 : Bool
     var Phone3 : String
     var Address1 : String
     var Address2 : String
     var Address3 : String
     var BirthDate : Date
+    var OkToHome : Bool
     var Comment : String
     var FromWeb : Bool
     
@@ -54,5 +58,9 @@ struct TitaniumClientContact
         BirthDate = Date()
         Comment = ""
         FromWeb = false
+        OkToPhone1 = false
+        OkToPhone2 = false
+        OkToPhone3 = false
+        OkToHome   = false
     }
 }

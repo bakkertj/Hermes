@@ -42,18 +42,18 @@ struct TitaniumDemographicHeader
     init()
     {
         TitaniumDemographicHeaderArray.append("clientid")
-        TitaniumDemographicHeaderArray.append("casenoteid")
-        TitaniumDemographicHeaderArray.append("recordtype")
-        TitaniumDemographicHeaderArray.append("notedate")
-        TitaniumDemographicHeaderArray.append("notetype")
+        TitaniumDemographicHeaderArray.append("casenoteid") // drop
+        TitaniumDemographicHeaderArray.append("recordtype") // drop
+        TitaniumDemographicHeaderArray.append("notedate") // drop
+        TitaniumDemographicHeaderArray.append("notetype") // drop
         TitaniumDemographicHeaderArray.append("fname")
         TitaniumDemographicHeaderArray.append("mname")
         TitaniumDemographicHeaderArray.append("lname")
-        TitaniumDemographicHeaderArray.append("email")
+        TitaniumDemographicHeaderArray.append("email") // drop
         TitaniumDemographicHeaderArray.append("q1842")
         TitaniumDemographicHeaderArray.append("q1844")
         TitaniumDemographicHeaderArray.append("q1845")
-        TitaniumDemographicHeaderArray.append("q1846")
+        TitaniumDemographicHeaderArray.append("q1846") // drop
         TitaniumDemographicHeaderArray.append("q1847")
         TitaniumDemographicHeaderArray.append("q1848")
         TitaniumDemographicHeaderArray.append("q1849")
@@ -75,12 +75,12 @@ struct TitaniumDemographicHeader
         TitaniumDemographicHeaderArray.append("qTRUE857a269FALSE")
         TitaniumDemographicHeaderArray.append("qTRUE857a3642")
         TitaniumDemographicHeaderArray.append("q1858")
-        TitaniumDemographicHeaderArray.append("q1863")
-        TitaniumDemographicHeaderArray.append("q1864")
+        TitaniumDemographicHeaderArray.append("q1863") // drop
+        TitaniumDemographicHeaderArray.append("q1864") // drop
         TitaniumDemographicHeaderArray.append("q3350")
         TitaniumDemographicHeaderArray.append("q3679")
         TitaniumDemographicHeaderArray.append("q3680")
         TitaniumDemographicHeaderArray.append("q3682")
-        TitaniumDemographicHeaderArray.append("q4793")
+        TitaniumDemographicHeaderArray.append("q4793") // drop
     }
 }

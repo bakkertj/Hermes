@@ -35,8 +35,40 @@ func readTitaniumDemographicCSV(fileName: URL)
         {
             let columns = row.components(separatedBy: ",")
             var demographicEntry = TitaniumDemographic()
+            demographicEntry.ClientID = Int(columns[TITANIUM_clientid])!
+            demographicEntry.FName = columns[TITANIUM_fname]
+            demographicEntry.MName = columns[TITANIUM_mname]
+            demographicEntry.LName = columns[TITANIUM_lname]
+            demographicEntry.q1842 = columns[TITANIUM_q1842]
+            demographicEntry.q1844 = columns[TITANIUM_q1844]
+            demographicEntry.q1845 = columns[TITANIUM_q1845]
+            demographicEntry.q1847 = columns[TITANIUM_q1847]
+            demographicEntry.q1848 = columns[TITANIUM_q1848]
+            demographicEntry.q1849 = columns[TITANIUM_q1849]
+            demographicEntry.q1850 = columns[TITANIUM_q1850]
+            demographicEntry.q1851 = columns[TITANIUM_q1851]
+            demographicEntry.q1852 = columns[TITANIUM_q1852]
+            demographicEntry.q1853 = columns[TITANIUM_q1853]
+            demographicEntry.q1854 = columns[TITANIUM_q1854]
+            demographicEntry.q1855 = columns[TITANIUM_q1855]
+            demographicEntry.qTRUE856 = ( columns[TITANIUM_qTRUE856] as NSString ).boolValue
+            demographicEntry.qTRUE857a2486 = ( columns[TITANIUM_qTRUE857a2486] as NSString ).boolValue
+            demographicEntry.qTRUE857a2487 = ( columns[TITANIUM_qTRUE857a2487] as NSString ).boolValue
+            demographicEntry.qTRUE857a2488 = ( columns[TITANIUM_qTRUE857a2488] as NSString ).boolValue
+            demographicEntry.qTRUE857a2489 = ( columns[TITANIUM_qTRUE857a2489] as NSString ).boolValue
+            demographicEntry.qTRUE857a249FALSE = ( columns[TITANIUM_qTRUE857a249FALSE] as NSString ).boolValue
+            demographicEntry.qTRUE857a249TRUE = ( columns[TITANIUM_qTRUE857a249TRUE] as NSString ).boolValue
+            demographicEntry.qTRUE857a2492 = ( columns[TITANIUM_qTRUE857a2492] as NSString ).boolValue
+            demographicEntry.qTRUE857a2689 = ( columns[TITANIUM_qTRUE857a2689] as NSString ).boolValue
+            demographicEntry.qTRUE857a269FALSE = ( columns[TITANIUM_qTRUE857a269FALSE] as NSString ).boolValue
+            demographicEntry.qTRUE857a3642 = ( columns[TITANIUM_qTRUE857a3642] as NSString ).boolValue
+            demographicEntry.q1858 = columns[TITANIUM_q1858]
+            demographicEntry.q3350 = columns[TITANIUM_q3350]
+            demographicEntry.q3679 = columns[TITANIUM_q3679]
+            demographicEntry.q3680 = columns[TITANIUM_q3680]
+            demographicEntry.q3682 = ( columns[TITANIUM_q3682] as NSString ).boolValue
 
-            
+       
             print (columns)
         }
         headerRead = true;
@@ -86,6 +118,8 @@ func readTitaniumContactCSV(fileName: URL)
             contactEntry.Address1   = columns[TITANIUM_c_address1]
             contactEntry.Address2   = columns[TITANIUM_c_address2]
             contactEntry.OkToHome   = ( columns[TITANIUM_c_oktohome] as NSString ).boolValue
+            
+            // To print the date myDate.string(format: "yyyy-MM-dd")
             let tempDate : Date = dateFormatterGet.date(from: columns[TITANIUM_c_birthdate] )!
             contactEntry.BirthDate  = tempDate
             contactEntry.Comment    = columns[TITANIUM_c_comment]

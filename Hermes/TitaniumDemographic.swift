@@ -11,15 +11,15 @@ var TitaniumDemographicArray = [TitaniumDemographic]()
 
 struct TitaniumDemographic
 {
-    var clientid : Int
-    var casenoteid : String
-    var recordtype : String
-    var notedate : Date
-    var notetype : String
-    var fname : String
-    var mname : String
-    var lname : String
-    var email : String
+    var ClientID : Int
+    var CaseNoteID : String
+    var RecordType : String
+    var NoteDate : Date
+    var NoteType : String
+    var FName : String
+    var MName : String
+    var LName : String
+    var Email : String
     var q1842 : String
     var q1844 : String
     var q1845 : String
@@ -55,15 +55,15 @@ struct TitaniumDemographic
     
     init()
     {
-        clientid = 0
-        casenoteid = ""
-        recordtype = ""
-        notedate = Date()
-        notetype = ""
-        fname = ""
-        mname = ""
-        lname = ""
-        email = ""
+        ClientID = 0
+        CaseNoteID = ""
+        RecordType = ""
+        NoteDate = Date()
+        NoteType = ""
+        FName   = ""
+        MName = ""
+        LName = ""
+        Email = ""
         q1842 = ""
         q1844 = ""
         q1845 = ""

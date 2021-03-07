@@ -71,6 +71,8 @@ for file in titaniumFiles
     readTitaniumContactCSV( fileName:file )
 }
 
+titaniumFiles.removeAll()
+
 titaniumDirectory.path = titaniumOption + "/Demographic"
 getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
 

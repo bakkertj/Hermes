@@ -16,6 +16,7 @@
 		DA8886A625F3DC0900CDDBEB /* DataValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886A525F3DC0900CDDBEB /* DataValidator.swift */; };
 		DA8886AA25F3E16100CDDBEB /* titaniumDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886A825F3E16100CDDBEB /* titaniumDefines.swift */; };
 		DA8886AB25F3E16100CDDBEB /* titaniumArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886A925F3E16100CDDBEB /* titaniumArray.swift */; };
+		DA8886AF25F5182200CDDBEB /* TitaniumDemographic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,7 @@
 		DA8886A525F3DC0900CDDBEB /* DataValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataValidator.swift; sourceTree = "<group>"; };
 		DA8886A825F3E16100CDDBEB /* titaniumDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = titaniumDefines.swift; sourceTree = "<group>"; };
 		DA8886A925F3E16100CDDBEB /* titaniumArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = titaniumArray.swift; sourceTree = "<group>"; };
+		DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitaniumDemographic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		DA88868C25F3388E00CDDBEB /* Hermes */ = {
 			isa = PBXGroup;
 			children = (
+				DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */,
 				DA88868D25F3388E00CDDBEB /* main.swift */,
 				DA8886A525F3DC0900CDDBEB /* DataValidator.swift */,
 				DA88869525F338D800CDDBEB /* FileOps.swift */,
@@ -153,6 +156,7 @@
 				DA8886AA25F3E16100CDDBEB /* titaniumDefines.swift in Sources */,
 				DA88869625F338D800CDDBEB /* FileOps.swift in Sources */,
 				DA8886A625F3DC0900CDDBEB /* DataValidator.swift in Sources */,
+				DA8886AF25F5182200CDDBEB /* TitaniumDemographic.swift in Sources */,
 				DA88869D25F348F300CDDBEB /* FileStreamer.swift in Sources */,
 				DA8886A025F3C7AF00CDDBEB /* TitaniumOperations.swift in Sources */,
 				DA88868E25F3388E00CDDBEB /* main.swift in Sources */,

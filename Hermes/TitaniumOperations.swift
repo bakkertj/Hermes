@@ -7,7 +7,7 @@
 
 import Foundation
 
-func readTitaniumCSV(fileName: URL)
+func readTitaniumDemographicCSV(fileName: URL)
 {
     var data : String = ""
     
@@ -15,7 +15,6 @@ func readTitaniumCSV(fileName: URL)
     dateFormatterGet.dateFormat = "yyyy-MM-dd"
     dateFormatterGet.locale = Locale(identifier: "en_US")
   
-   // print("\(dateFormatterGet.")
     do
     {
         data = try String(contentsOf: fileName, encoding: .utf8)
@@ -25,7 +24,43 @@ func readTitaniumCSV(fileName: URL)
         print("Error opening file \(fileName.path)")
     }
     
-    var result: [[String]] = []
+    let rows = data.components(separatedBy: "\n")
+    var headerRead : Bool = false
+    
+    var rowCount : Int = 0
+    
+    for row in rows
+    {
+        if( headerRead == true )
+        {
+            let columns = row.components(separatedBy: ",")
+            var demographicEntry = TitaniumDemographic()
+
+            
+            print (columns)
+        }
+        headerRead = true;
+        rowCount += 1
+    }
+}
+
+func readTitaniumContactCSV(fileName: URL)
+{
+    var data : String = ""
+    
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd"
+    dateFormatterGet.locale = Locale(identifier: "en_US")
+  
+    do
+    {
+        data = try String(contentsOf: fileName, encoding: .utf8)
+    }
+    catch
+    {
+        print("Error opening file \(fileName.path)")
+    }
+    
     let rows = data.components(separatedBy: "\n")
     var headerRead : Bool = false
     
@@ -51,12 +86,10 @@ func readTitaniumCSV(fileName: URL)
             contactEntry.Address1   = columns[TITANIUM_c_address1]
             contactEntry.Address2   = columns[TITANIUM_c_address2]
             contactEntry.OkToHome   = ( columns[TITANIUM_c_oktohome] as NSString ).boolValue
-            
             let tempDate : Date = dateFormatterGet.date(from: columns[TITANIUM_c_birthdate] )!
             contactEntry.BirthDate  = tempDate
             contactEntry.Comment    = columns[TITANIUM_c_comment]
             
-            result.append(columns)
             print (columns)
         }
         headerRead = true;

@@ -67,5 +67,5 @@ getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
 
 for file in titaniumFiles
 {
-    readTitaniumCSV( fileName:file )
+    readTitaniumContactCSV( fileName:file )
 }

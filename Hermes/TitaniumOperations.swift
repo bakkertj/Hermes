@@ -112,9 +112,12 @@ func readTitaniumContactCSV(fileName: URL)
             contactEntry.OkToPhone1 = ( columns[TITANIUM_c_oktophone1] as NSString ).boolValue
             contactEntry.OkToPhone2 = ( columns[TITANIUM_c_oktophone2] as NSString ).boolValue
             contactEntry.OkToPhone3 = ( columns[TITANIUM_c_oktophone3] as NSString ).boolValue
-            contactEntry.Phone1     = columns[TITANIUM_c_phone1]
-            contactEntry.Phone2     = columns[TITANIUM_c_phone2]
-            contactEntry.Phone3     = columns[TITANIUM_c_phone3]
+            contactEntry.Phone1     = stripPhoneNumber( number: columns[TITANIUM_c_phone1] )
+            assert( contactEntry.Phone1.count == 10 || contactEntry.Phone1.count == 0 , "Client \(contactEntry.ClientID) has a bad phone 1" )
+            contactEntry.Phone2     = stripPhoneNumber( number: columns[TITANIUM_c_phone2] )
+            assert( contactEntry.Phone2.count == 10 || contactEntry.Phone2.count == 0, "Client \(contactEntry.ClientID) has a bad phone 2" )
+            contactEntry.Phone3     = stripPhoneNumber( number: columns[TITANIUM_c_phone3] )
+            assert( contactEntry.Phone3.count == 10 || contactEntry.Phone3.count == 0, "Client \(contactEntry.ClientID) has a bad phone 3" )
             contactEntry.Address1   = columns[TITANIUM_c_address1]
             contactEntry.Address2   = columns[TITANIUM_c_address2]
             contactEntry.OkToHome   = ( columns[TITANIUM_c_oktohome] as NSString ).boolValue

@@ -46,3 +46,6 @@ extension Date {
     }
 }
 
+func stripPhoneNumber( number : String ) -> String{
+  return String(number.filter { !" \n\t\rzxcvbnm,.asdfghjklqwertyuiop[]()-/".contains($0) })
+}

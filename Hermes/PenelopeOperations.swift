@@ -7,6 +7,120 @@
 
 import Foundation
 
+func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic] )
+{
+    var fileStreamer = FileStreamer( newFile : "Individuals Contacts.csv");
+    
+    fileStreamer.write("uniqueIndId, contactType, contact, extension, useContact, instructions, primaryContact\n" )
+    
+    for person in fromDemographics
+    {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        
+        var masterSet : Bool = false
+        
+        let clientID : String = String(person.ClientID)
+        
+        // if telephone exists then create a home entry
+        if( findClientContactEntry( who: person.ClientID ).Phone1 != "" )
+        {
+            var phone : String = findClientContactEntry( who: person.ClientID ).Phone1
+            
+            phone.insert( "(", at: phone.startIndex )
+            phone.insert( ")", at: phone.index(phone.startIndex, offsetBy: 4))
+            phone.insert( "-", at: phone.index(phone.startIndex, offsetBy: 8))
+            
+            var oktocontact : String = ""
+            if( findClientContactEntry( who: person.ClientID ).OkToPhone1 )
+            {
+                oktocontact = "Safe"
+            }
+            
+            masterSet = true;
+            
+            let output : String = clientID + "," + "Tel (Home)" + "," + phone + "," + "," + "TRUE" + "," + oktocontact + "," + "TRUE" + "\n"
+            
+            
+            fileStreamer.write( output )
+        }
+        
+        // if telephone exists then create a call entry
+        if( findClientContactEntry( who: person.ClientID ).Phone2 != "" )
+        {
+            var phone : String = findClientContactEntry( who: person.ClientID ).Phone2
+            
+            phone.insert( "(", at: phone.startIndex )
+            phone.insert( ")", at: phone.index(phone.startIndex, offsetBy: 4))
+            phone.insert( "-", at: phone.index(phone.startIndex, offsetBy: 8))
+            
+            var oktocontact : String = ""
+            if( findClientContactEntry( who: person.ClientID ).OkToPhone2 )
+            {
+                oktocontact = "Safe"
+            }
+            
+            masterSet = true;
+            
+            let output : String = clientID + "," + "Tel (Cell)" + "," + phone + "," + "," + "TRUE" + "," + oktocontact + "," + "TRUE" + "\n"
+            
+            
+            fileStreamer.write( output )
+        }
+        
+        // if telephone exists then create a call entry
+        if( findClientContactEntry( who: person.ClientID ).Phone3 != "" )
+        {
+            var phone : String = findClientContactEntry( who: person.ClientID ).Phone3
+            
+            phone.insert( "(", at: phone.startIndex )
+            phone.insert( ")", at: phone.index(phone.startIndex, offsetBy: 4))
+            phone.insert( "-", at: phone.index(phone.startIndex, offsetBy: 8))
+            
+            var oktocontact : String = ""
+            if( findClientContactEntry( who: person.ClientID ).OkToPhone3 )
+            {
+                oktocontact = "Safe"
+            }
+            
+            masterSet = true;
+            
+            let output : String = clientID + "," + "Work Phone" + "," + phone + "," + "," + "TRUE" + "," + oktocontact + "," + "TRUE" + "\n"
+            
+            
+            fileStreamer.write( output )
+        }
+        
+        // if email exists then create an email entry
+        if( findClientContactEntry( who: person.ClientID ).Email != "" )
+        {
+            let email : String = findClientContactEntry( who: person.ClientID ).Email
+            
+            var oktocontact : String = ""
+            if( findClientContactEntry( who: person.ClientID ).OkToEmail )
+            {
+                oktocontact = "Safe"
+            }
+            
+            var master : String = "FALSE"
+            if( masterSet == false )
+            {
+                masterSet = true
+                master = "TRUE"
+            }
+            let output : String = clientID + "," + "Email" + "," + email + "," + "," + "TRUE" + "," + oktocontact + "," + master + "\n"
+            
+            fileStreamer.write( output )
+        }
+        
+        
+        
+    }
+    
+    
+    
+}
+
 func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic] )
 {
     var fileStreamer = FileStreamer( newFile : "Individuals.csv");

@@ -21,6 +21,7 @@ struct TitaniumClientContact
     var AddDate : Date
     var EditDate : Date
     var StatusExt : String
+    var OkToEmail : Bool
     var Email : String
     var OkToPhone1 : Bool
     var Phone1 : String
@@ -58,6 +59,7 @@ struct TitaniumClientContact
         BirthDate = Date()
         Comment = ""
         FromWeb = false
+        OkToEmail = false
         OkToPhone1 = false
         OkToPhone2 = false
         OkToPhone3 = false

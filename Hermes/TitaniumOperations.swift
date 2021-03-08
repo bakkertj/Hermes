@@ -137,6 +137,7 @@ func readTitaniumContactCSV(fileName: URL)
             contactEntry.MiddleName = columns[TITANIUM_c_middlename]
             contactEntry.LastName   = columns[TITANIUM_c_lastname]
             contactEntry.Email      = columns[TITANIUM_c_email]
+            contactEntry.OkToEmail  = ( columns[TITANIUM_c_oktoemail] as NSString ).boolValue
             contactEntry.OkToPhone1 = ( columns[TITANIUM_c_oktophone1] as NSString ).boolValue
             contactEntry.OkToPhone2 = ( columns[TITANIUM_c_oktophone2] as NSString ).boolValue
             contactEntry.OkToPhone3 = ( columns[TITANIUM_c_oktophone3] as NSString ).boolValue

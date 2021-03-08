@@ -1,3 +1,3 @@
-# Hermes - Format data and transmit data to Athena
+# Hermes - Format data to transmit to Athena
 
 ## Usage:

@@ -79,7 +79,7 @@ func readTitaniumDemographicCSV(fileName: URL)
             demographicEntry.q1853 = columns[TITANIUM_q1853]
             demographicEntry.q1854 = columns[TITANIUM_q1854]
             demographicEntry.q1855 = columns[TITANIUM_q1855]
-            demographicEntry.qTRUE856 = ( columns[TITANIUM_qTRUE856] as NSString ).boolValue
+            demographicEntry.q1856 = ( columns[TITANIUM_q1856] as NSString ).boolValue
             demographicEntry.qTRUE857a2486 = ( columns[TITANIUM_qTRUE857a2486] as NSString ).boolValue
             demographicEntry.qTRUE857a2487 = ( columns[TITANIUM_qTRUE857a2487] as NSString ).boolValue
             demographicEntry.qTRUE857a2488 = ( columns[TITANIUM_qTRUE857a2488] as NSString ).boolValue

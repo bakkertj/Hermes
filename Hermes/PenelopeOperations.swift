@@ -24,7 +24,11 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         let birthDate : String = df.string(from: findClientContactEntry(who: person.ClientID).BirthDate)
         
         let siteName : String = MapQ1842( from: person.q1842 )
-        let referral : String = person.q1848
+        var referral : String = "ERROR"
+        if( ValidateLanguage( language : MapQ1847( language: person.q1848 ) ) )
+        {
+            referral = MapQ1847( language: person.q1848)
+        }
         var indLanguage : String = "ERROR"
         if( ValidateLanguage( language : MapQ1847( language: person.q1847 ) ) )
         {
@@ -34,19 +38,40 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         let notes : String = findClientContactEntry(who: person.ClientID).Address1 + findClientContactEntry(who: person.ClientID).Address2
         let mainCountry : String = person.q3680
         
+        // Bool?
         var userDefinedCheckbox3 : String
+        userDefinedCheckbox3 = String( person.q3682)
+        
+        var userDefinedCheckbox4 : String
+        userDefinedCheckbox4 = String( person.q1856)
+        
+        var userDefinedDropdown1 : String
         
         if( person.q1844 != "" )
         {
-            userDefinedCheckbox3 = person.q1844
+            userDefinedDropdown1 = person.q1844
         }
         else
         {
-            userDefinedCheckbox3 = person.q3679
+            userDefinedDropdown1 = person.q3679
         }
         
+        let userDefinedDropdown3 : String = person.q1849
+        let userDefinedDropdown4 : String = person.q1853
+        let userDefinedDropdown6 : String = person.q1858
+        let userDefinedDropdown7 : String = person.q1850
+        let userDefinedDropdown8 : String = person.q1851
+        let userDefinedDropdown9 : String = person.q3350
+        let userDefinedDropdown10 : String = person.q1852
+        let userDefinedDropdown11 : String = person.q1854
+        let userDefinedDropdown12 : String = person.q1855
         
-        let output : String = clientID + " , " + name + " , " +  lastName + " , " + person.q1845 + " , " + birthDate + " , " + siteName + " , " + referral + " , " + indLanguage + " , " + notes + " , " + mainCountry + " , " + userDefinedCheckbox3 + "\n"
+        let userDefinedText1 = findClientContactEntry(who: person.ClientID).FirstName + " " + findClientContactEntry(who: person.ClientID).MiddleName + " " + findClientContactEntry(who: person.ClientID).LastName
+        
+        let userDefinedText2 : String = String( findClientContactEntry(who: person.ClientID).ClientID )
+        
+        let output : String = clientID + " , " + name + " , " +  lastName + " , " + person.q1845 + " , " + birthDate + " , " + siteName + " , " + referral + " , " + indLanguage + " , " + notes + " , " + mainCountry + " , " + " , " + userDefinedCheckbox3 + " , " + userDefinedCheckbox4 + " , " + userDefinedDropdown1 + " , " + userDefinedDropdown3 + " , " + userDefinedDropdown4 + " , " + userDefinedDropdown6 + " , " + userDefinedDropdown7 + " , " + userDefinedDropdown8 + " , " + userDefinedDropdown9 +  " , " + userDefinedDropdown10 + " , " + userDefinedDropdown11 + " , " + userDefinedDropdown12 + " , " + userDefinedText1 + " , " + userDefinedText2 + "\n"
+        
         
         fileStreamer.write( output )
     }

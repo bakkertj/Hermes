@@ -33,7 +33,7 @@ struct TitaniumDemographic
     var q1853 : String
     var q1854 : String
     var q1855 : String
-    var qTRUE856 : Bool
+    var q1856 : Bool
     var qTRUE857a2486 : Bool
     var qTRUE857a2487 : Bool
     var qTRUE857a2488 : Bool
@@ -77,7 +77,7 @@ struct TitaniumDemographic
         q1853 = ""
         q1854 = ""
         q1855 = ""
-        qTRUE856 = false
+        q1856 = false
         qTRUE857a2486 = false
         qTRUE857a2487 = false
         qTRUE857a2488 = false

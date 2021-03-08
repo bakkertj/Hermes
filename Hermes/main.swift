@@ -80,3 +80,6 @@ for file in titaniumFiles
 {
     readTitaniumDemographicCSV( fileName:file )
 }
+
+writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray)
+

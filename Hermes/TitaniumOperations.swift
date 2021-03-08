@@ -7,6 +7,34 @@
 
 import Foundation
 
+func findClientContactEntry( who : Int ) -> TitaniumClientContact
+{
+    let bad : TitaniumClientContact = TitaniumClientContact()
+    for entry in TitaniumClientContactArray
+    {
+        if( entry.ClientID == who )
+        {
+            return entry
+        }
+    }
+    
+    return bad
+}
+
+func findDemographicEntry( who : Int ) -> TitaniumDemographic
+{
+    let bad : TitaniumDemographic = TitaniumDemographic()
+    for entry in TitaniumDemographicArray
+    {
+        if( entry.ClientID == who )
+        {
+            return entry
+        }
+    }
+    
+    return bad
+}
+
 func readTitaniumDemographicCSV(fileName: URL)
 {
     var data : String = ""
@@ -68,7 +96,7 @@ func readTitaniumDemographicCSV(fileName: URL)
             demographicEntry.q3680 = columns[TITANIUM_q3680]
             demographicEntry.q3682 = ( columns[TITANIUM_q3682] as NSString ).boolValue
 
-       
+            TitaniumDemographicArray.append(demographicEntry)
             print (columns)
         }
         headerRead = true;
@@ -126,7 +154,7 @@ func readTitaniumContactCSV(fileName: URL)
             let tempDate : Date = dateFormatterGet.date(from: columns[TITANIUM_c_birthdate] )!
             contactEntry.BirthDate  = tempDate
             contactEntry.Comment    = columns[TITANIUM_c_comment]
-            
+            TitaniumClientContactArray.append(contactEntry)
             print (columns)
         }
         headerRead = true;

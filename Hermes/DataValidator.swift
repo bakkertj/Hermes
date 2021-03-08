@@ -174,3 +174,69 @@ func MapQ1847( language : String ) -> String
     default: return "ERROR"
     }
 }
+
+func MapQ1848( language : String ) -> String
+{
+    switch language{
+    case "English": return "English"
+    case "Spanish": return "Spanish"
+    case "Both (English & Spanish)": return "English & Spanish (both)"
+    case "Other": return "Other"
+    default: return "ERROR"
+    }
+}
+
+func MapQ1849( titanium : String ) -> String
+{
+    switch titanium{
+    case "Yes": return "Current Involvement"
+    case "No": return "No Involvement"
+    case "Previously": return "Previous Involvement"
+    default: return "ERROR"
+    }
+}
+
+func MapQ1853( titanium : String ) -> String
+{
+    switch titanium
+    {
+    case "Not employed": return "Not employed"
+    case "Employed part-time": return "Part-time"
+    case "Full-time": return "Full-time"
+    case "2+ jobs": return "2+ jobs"
+    default: return "ERROR"
+    }
+}
+
+func MapQ1854( titanium : String ) -> String
+{
+    switch titanium{
+    case "Currently in a relationship with abuser": return "In a relationship with abuser"
+    case "On and off relationship with abuser": return "On/off relationship with abuser"
+    case "Terminated relationship with abuser": return "Ended relationship with abuser"
+    default: return ""
+    }
+}
+
+func MapQ1858( titanium : String ) -> String
+{
+    switch titanium {
+    case "Would not qualify at this time" : return "No and would not qualify"
+    case "Has applied" : return "No, but has applied"
+    case "Has a protective order" : return "Yes, currently has a protective order"
+    case "Does not have a protective order" : return "No"
+        
+    default: return "ERROR"
+    }
+}
+
+func MapQ1844( titanium : String ) -> String
+{
+    switch titanium {
+    case "White" : return "Caucasian/White"
+    case "Black" : return "African American/Black"
+    case "Hispanic" : return "Hispanic/Latino"
+    case "Other" : return "Other"
+    default: return "ERROR"
+    }
+}

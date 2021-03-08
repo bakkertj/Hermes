@@ -17,6 +17,7 @@
 		DA8886AA25F3E16100CDDBEB /* titaniumDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886A825F3E16100CDDBEB /* titaniumDefines.swift */; };
 		DA8886AB25F3E16100CDDBEB /* titaniumArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886A925F3E16100CDDBEB /* titaniumArray.swift */; };
 		DA8886AF25F5182200CDDBEB /* TitaniumDemographic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */; };
+		DA8886B325F57B3700CDDBEB /* PenelopeOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886B225F57B3700CDDBEB /* PenelopeOperations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,7 @@
 		DA8886A825F3E16100CDDBEB /* titaniumDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = titaniumDefines.swift; sourceTree = "<group>"; };
 		DA8886A925F3E16100CDDBEB /* titaniumArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = titaniumArray.swift; sourceTree = "<group>"; };
 		DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitaniumDemographic.swift; sourceTree = "<group>"; };
+		DA8886B225F57B3700CDDBEB /* PenelopeOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenelopeOperations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +77,7 @@
 		DA88868C25F3388E00CDDBEB /* Hermes */ = {
 			isa = PBXGroup;
 			children = (
-				DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */,
+				DA8886B225F57B3700CDDBEB /* PenelopeOperations.swift */,
 				DA88868D25F3388E00CDDBEB /* main.swift */,
 				DA8886A525F3DC0900CDDBEB /* DataValidator.swift */,
 				DA88869525F338D800CDDBEB /* FileOps.swift */,
@@ -84,6 +86,7 @@
 				DA8886A825F3E16100CDDBEB /* titaniumDefines.swift */,
 				DA8886A225F3DB1C00CDDBEB /* TitaniumClientContact.swift */,
 				DA88869F25F3C7AF00CDDBEB /* TitaniumOperations.swift */,
+				DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */,
 			);
 			path = Hermes;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				DA8886AB25F3E16100CDDBEB /* titaniumArray.swift in Sources */,
 				DA8886A325F3DB1C00CDDBEB /* TitaniumClientContact.swift in Sources */,
 				DA8886AA25F3E16100CDDBEB /* titaniumDefines.swift in Sources */,
+				DA8886B325F57B3700CDDBEB /* PenelopeOperations.swift in Sources */,
 				DA88869625F338D800CDDBEB /* FileOps.swift in Sources */,
 				DA8886A625F3DC0900CDDBEB /* DataValidator.swift in Sources */,
 				DA8886AF25F5182200CDDBEB /* TitaniumDemographic.swift in Sources */,

@@ -171,7 +171,7 @@ func MapQ1847( language : String ) -> String
     case "Spanish": return "Spanish"
     case "Both (English & Spanish)": return "Spanish"
     case "Other": return "Other"
-    default: return "ERROR"
+    default: return "ERROR: \(language)"
     }
 }
 
@@ -182,7 +182,7 @@ func MapQ1848( language : String ) -> String
     case "Spanish": return "Spanish"
     case "Both (English & Spanish)": return "English & Spanish (both)"
     case "Other": return "Other"
-    default: return "ERROR"
+    default: return "ERROR: \(language)"
     }
 }
 
@@ -192,7 +192,7 @@ func MapQ1849( titanium : String ) -> String
     case "Yes": return "Current Involvement"
     case "No": return "No Involvement"
     case "Previously": return "Previous Involvement"
-    default: return "ERROR"
+    default: return "ERROR: \(titanium)"
     }
 }
 
@@ -204,7 +204,7 @@ func MapQ1853( titanium : String ) -> String
     case "Employed part-time": return "Part-time"
     case "Full-time": return "Full-time"
     case "2+ jobs": return "2+ jobs"
-    default: return "ERROR"
+    default: return "ERROR: \(titanium)"
     }
 }
 
@@ -221,12 +221,12 @@ func MapQ1854( titanium : String ) -> String
 func MapQ1858( titanium : String ) -> String
 {
     switch titanium {
-    case "Would not qualify at this time" : return "No and would not qualify"
-    case "Has applied" : return "No, but has applied"
-    case "Has a protective order" : return "Yes, currently has a protective order"
-    case "Does not have a protective order" : return "No"
+    case "Would not qualify at this time" : return "\"No and would not qualify\""
+    case "Has applied" : return "\"No, but has applied\""
+    case "Has a protective order" : return "\"Yes, currently has a protective order\""
+    case "Does not have a protective order" : return "\"No\""
         
-    default: return "ERROR"
+    default: return "ERROR: \(titanium)"
     }
 }
 
@@ -237,6 +237,8 @@ func MapQ1844( titanium : String ) -> String
     case "Black" : return "African American/Black"
     case "Hispanic" : return "Hispanic/Latino"
     case "Other" : return "Other"
-    default: return "ERROR"
+    default: return "ERROR: \(titanium)"
     }
 }
+
+

@@ -34,16 +34,16 @@ struct TitaniumDemographic
     var q1854 : String
     var q1855 : String
     var q1856 : Bool
-    var qTRUE857a2486 : Bool
-    var qTRUE857a2487 : Bool
-    var qTRUE857a2488 : Bool
-    var qTRUE857a2489 : Bool
-    var qTRUE857a249FALSE : Bool
-    var qTRUE857a249TRUE : Bool
-    var qTRUE857a2492 : Bool
-    var qTRUE857a2689 : Bool
-    var qTRUE857a269FALSE : Bool
-    var qTRUE857a3642 : Bool
+    var q1857a2486 : Bool
+    var q1857a2487 : Bool
+    var q1857a2488 : Bool
+    var q1857a2489 : Bool
+    var q1857a2490 : Bool
+    var q1857a2491 : Bool
+    var q1857a2492 : Bool
+    var q1857a2689 : Bool
+    var q1857a2690 : Bool
+    var q1857a3642 : Bool
     var q1858 : String
     var q1863 : Int
     var q1864 : String
@@ -78,16 +78,16 @@ struct TitaniumDemographic
         q1854 = ""
         q1855 = ""
         q1856 = false
-        qTRUE857a2486 = false
-        qTRUE857a2487 = false
-        qTRUE857a2488 = false
-        qTRUE857a2489 = false
-        qTRUE857a249FALSE = false
-        qTRUE857a249TRUE = false
-        qTRUE857a2492 = false
-        qTRUE857a2689 = false
-        qTRUE857a269FALSE = false
-        qTRUE857a3642 = false
+        q1857a2486 = false
+        q1857a2487 = false
+        q1857a2488 = false
+        q1857a2489 = false
+        q1857a2490 = false
+        q1857a2491 = false
+        q1857a2492 = false
+        q1857a2689 = false
+        q1857a2690 = false
+        q1857a3642 = false
         q1858 = ""
         q1863 = 0
         q1864 = ""

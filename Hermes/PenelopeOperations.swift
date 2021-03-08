@@ -35,7 +35,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
             indLanguage = MapQ1847( language: person.q1847)
         }
         
-        let notes : String = findClientContactEntry(who: person.ClientID).Address1 + findClientContactEntry(who: person.ClientID).Address2
+        let notes : String = findClientContactEntry(who: person.ClientID).Address1 + " " + findClientContactEntry(who: person.ClientID).Address2
         let mainCountry : String = person.q3680
         
         // Bool?
@@ -58,6 +58,50 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         
         let userDefinedDropdown3 : String = MapQ1849( titanium: person.q1849 )
         let userDefinedDropdown4 : String = MapQ1853( titanium: person.q1853 )
+        
+        var userDefinedDropdown5 : String = ""
+    
+        if( person.q1857a2689)
+        {
+            userDefinedDropdown5 = "0"
+        }
+        else if ( person.q1857a2486 )
+        {
+            userDefinedDropdown5 = "1"
+        }
+        else if ( person.q1857a2487 )
+        {
+            userDefinedDropdown5 = "2"
+        }
+        else if ( person.q1857a2488 )
+        {
+            userDefinedDropdown5 = "3"
+        }
+        else if ( person.q1857a2489 )
+        {
+            userDefinedDropdown5 = "4"
+        }
+        else if ( person.q1857a2490 )
+        {
+            userDefinedDropdown5 = "5"
+        }
+        else if ( person.q1857a2491 )
+        {
+            userDefinedDropdown5 = "6"
+        }
+        else if ( person.q1857a2492 || person.q1857a2690 )
+        {
+            userDefinedDropdown5 = "7+"
+        }
+        else if ( person.q1856 )
+        {
+            userDefinedDropdown5 = "N/A — no children"
+        }
+        else if ( person.q1857a3642 )
+        {
+            userDefinedDropdown5 = ""
+        }  
+        
         let userDefinedDropdown6 : String = MapQ1858( titanium : person.q1858 )
         let userDefinedDropdown7 : String = person.q1850
         let userDefinedDropdown8 : String = person.q1851
@@ -70,7 +114,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         
         let userDefinedText2 : String = String( findClientContactEntry(who: person.ClientID).ClientID )
         
-        let output : String = clientID + " , " + name + " , " +  lastName + " , " + person.q1845 + " , " + birthDate + " , " + siteName + " , " + referral + " , " + indLanguage + " , " + notes + " , " + mainCountry + " , " + userDefinedCheckbox3 + " , " + userDefinedCheckbox4 + " , " + userDefinedDropdown1 + " , " + userDefinedDropdown3 + " , " + userDefinedDropdown4 + " , " + "NEED TO DISCUSS" + " , " + userDefinedDropdown6 + " , " + userDefinedDropdown7 + " , " + userDefinedDropdown8 + " , " + userDefinedDropdown9 +  " , " + userDefinedDropdown10 + " , " + userDefinedDropdown11 + " , " + userDefinedDropdown12 + " , " + userDefinedText1 + " , " + userDefinedText2 + "\n"
+        let output : String = clientID + "," + name + "," +  lastName + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + indLanguage + "," + notes + "," + mainCountry + "," + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + userDefinedDropdown1 + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + "," + userDefinedDropdown6 + "," + userDefinedDropdown7 + "," + userDefinedDropdown8 + "," + userDefinedDropdown9 +  "," + userDefinedDropdown10 + "," + userDefinedDropdown11 + "," + userDefinedDropdown12 + "," + userDefinedText1 + "," + userDefinedText2 + "\n"
         
         
         fileStreamer.write( output )

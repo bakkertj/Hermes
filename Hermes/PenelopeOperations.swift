@@ -15,8 +15,39 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
     //writing
     for person in fromDemographics
     {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        
+        let clientID : String = String(person.ClientID)
         let name : String = findClientContactEntry(who: person.ClientID).FirstName + " " + findClientContactEntry(who: person.ClientID).MiddleName
-        fileStreamer.write( String(person.ClientID) + " , " + name + " , " +  findClientContactEntry(who: person.ClientID).LastName + "\n")
+        let lastName : String = findClientContactEntry(who: person.ClientID).LastName
+        let birthDate : String = df.string(from: findClientContactEntry(who: person.ClientID).BirthDate)
+        
+        let siteName : String = MapQ1842( from: person.q1842 )
+        let referral : String = person.q1848
+        var indLanguage : String = "ERROR"
+        if( ValidateLanguage( language : MapQ1847( language: person.q1847 ) ) )
+        {
+            indLanguage = MapQ1847( language: person.q1847)
+        }
+        
+        let notes : String = findClientContactEntry(who: person.ClientID).Address1 + findClientContactEntry(who: person.ClientID).Address2
+        let mainCountry : String = person.q3680
+        
+        var userDefinedCheckbox3 : String
+        
+        if( person.q1844 != "" )
+        {
+            userDefinedCheckbox3 = person.q1844
+        }
+        else
+        {
+            userDefinedCheckbox3 = person.q3679
+        }
+        
+        
+        let output : String = clientID + " , " + name + " , " +  lastName + " , " + person.q1845 + " , " + birthDate + " , " + siteName + " , " + referral + " , " + indLanguage + " , " + notes + " , " + mainCountry + " , " + userDefinedCheckbox3 + "\n"
+        
+        fileStreamer.write( output )
     }
-    
 }

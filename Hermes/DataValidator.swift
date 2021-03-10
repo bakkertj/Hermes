@@ -233,14 +233,14 @@ func MapQ1854( titanium : String ) -> String
 func MapQ1858( titanium : String ) -> String
 {
     switch titanium {
-    case "Would not qualify at this time" : return "\"No and would not qualify\""
-    case "Has applied" : return "\"No, but has applied\""
-    case "Has a protective order" : return "\"Yes, currently has a protective order\""
-    case "Does not have a protective order" : return "\"No\""
-    case "would not qualify at this time" : return "\"No and would not qualify\""
-    case "has applied" : return "\"No, but has applied\""
-    case "has a protective order" : return "\"Yes, currently has a protective order\""
-    case "does not have a protective order" : return "\"No\""
+    case "Would not qualify at this time" : return "No and would not qualify"
+    case "Has applied" : return "No, but has applied"
+    case "Has a protective order" : return "Yes, currently has a protective order"
+    case "Does not have a protective order" : return "No"
+    case "would not qualify at this time" : return "No and would not qualify"
+    case "has applied" : return "No, but has applied"
+    case "has a protective order" : return "Yes, currently has a protective order"
+    case "does not have a protective order" : return "No"
     case "<No Response>": return ""
         
     default: return "ERROR: \(titanium)"
@@ -273,6 +273,7 @@ func MapQ1850( titanium : String ) -> String
     switch titanium {
     case "$0": return "$0"
     case "$0.00": return "$0"
+    case "$0.00 ": return "$0"
     case "$1-$30K": return "$1-$30k"
     case "$30K-$75K": return "$30k-$75k"
     case "$75K-$150K": return "$75k-$150k"
@@ -291,6 +292,7 @@ func MapQ1851( titanium : String ) -> String
     switch titanium {
     case "$0": return "$0"
     case "$0.00": return "$0"
+    case "$0.00 ": return "$0"
     case "$1-$30K": return "$1-$30k"
     case "$30K-$75K": return "$30k-$75k"
     case "$75K-$150K": return "$75k-$150k"

@@ -228,7 +228,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         
         let userDefinedText2 : String = String( findClientContactEntry(who: person.ClientID).ClientID )
         
-        let output : String = clientID + "," + name + "," +  lastName + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + indLanguage + "," + notes + "," + mainCountry + "," + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + userDefinedDropdown1 + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + ",\"" + userDefinedDropdown6 + "\",\"" + userDefinedDropdown7 + "\",\"" + userDefinedDropdown8 + "\",\"" + userDefinedDropdown9 +  "\"," + userDefinedDropdown10 + "," + userDefinedDropdown11 + "," + userDefinedDropdown12 + "," + userDefinedText1 + "," + userDefinedText2 + "\n"
+        let output : String = clientID + "," + name + "," +  lastName + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + indLanguage + "," + notes + "," + mainCountry + "," + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + userDefinedDropdown1 + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + ",\"" + userDefinedDropdown6 + "\",\"" + userDefinedDropdown7 + "\",\"" + userDefinedDropdown8 + "\",\"" + userDefinedDropdown9 +  "\",\"" + userDefinedDropdown10 + "\",\"" + userDefinedDropdown11 + "\",\"" + userDefinedDropdown12 + "\"," + userDefinedText1 + "," + userDefinedText2 + "\n"
         
         
         fileStreamer.write( output )

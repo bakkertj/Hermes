@@ -9,7 +9,7 @@ import Foundation
 
 func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic] )
 {
-    var fileStreamer = FileStreamer( newFile : "Individuals Contacts.csv");
+    var fileStreamer = FileStreamer( newFile : "Individual Contacts.csv");
     
     fileStreamer.write("uniqueIndId, contactType, contact, extension, useContact, instructions, primaryContact\n" )
     

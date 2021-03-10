@@ -55,12 +55,17 @@ func MapQ1842( from: String ) -> String
     switch from
     {
     case "OR": return "Outreach"
+    case "Outreach": return "Outreach"
     case "SH": return "Shelter"
+    case "Shelter": return "Shelter"
     case "AH": return "Annie's House"
+    case "Annie's House": return "Annie's House"
     case "Thrift": return "Outreach"
+    case "Thrift Store": return "Outreach"
     case "School": return "Shelter"
+    case "OR Child Care": return "Outreach"
     case "OR Childcare" : return "Outreach"
-    default: return ""
+    default: return "ERROR: \(from)"
     }
 }
 
@@ -171,6 +176,7 @@ func MapQ1847( language : String ) -> String
     case "Spanish": return "Spanish"
     case "Both (English & Spanish)": return "Spanish"
     case "Other": return "Other"
+    case "<No Response>": return ""
     default: return "ERROR: \(language)"
     }
 }
@@ -182,6 +188,7 @@ func MapQ1848( language : String ) -> String
     case "Spanish": return "Spanish"
     case "Both (English & Spanish)": return "English & Spanish (both)"
     case "Other": return "Other"
+    case "<No Response>": return ""
     default: return "ERROR: \(language)"
     }
 }
@@ -192,6 +199,7 @@ func MapQ1849( titanium : String ) -> String
     case "Yes": return "Current Involvement"
     case "No": return "No Involvement"
     case "Previously": return "Previous Involvement"
+    case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
 }
@@ -203,7 +211,10 @@ func MapQ1853( titanium : String ) -> String
     case "Not employed": return "Not employed"
     case "Employed part-time": return "Part-time"
     case "Full-time": return "Full-time"
+    case "Full Time": return "Full-time"
+    case "Full-Time": return "Full-time"
     case "2+ jobs": return "2+ jobs"
+    case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
 }
@@ -214,7 +225,8 @@ func MapQ1854( titanium : String ) -> String
     case "Currently in a relationship with abuser": return "In a relationship with abuser"
     case "On and off relationship with abuser": return "On/off relationship with abuser"
     case "Terminated relationship with abuser": return "Ended relationship with abuser"
-    default: return ""
+    case "<No Response>": return ""
+    default: return "ERROR: \(titanium)"
     }
 }
 
@@ -225,6 +237,11 @@ func MapQ1858( titanium : String ) -> String
     case "Has applied" : return "\"No, but has applied\""
     case "Has a protective order" : return "\"Yes, currently has a protective order\""
     case "Does not have a protective order" : return "\"No\""
+    case "would not qualify at this time" : return "\"No and would not qualify\""
+    case "has applied" : return "\"No, but has applied\""
+    case "has a protective order" : return "\"Yes, currently has a protective order\""
+    case "does not have a protective order" : return "\"No\""
+    case "<No Response>": return ""
         
     default: return "ERROR: \(titanium)"
     }
@@ -237,8 +254,88 @@ func MapQ1844( titanium : String ) -> String
     case "Black" : return "African American/Black"
     case "Hispanic" : return "Hispanic/Latino"
     case "Other" : return "Other"
+    case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
 }
 
 
+func MapQ3680( titanium : String ) -> String
+{
+    switch titanium {
+    case "Other": return ""
+    default: return titanium
+    }
+}
+
+func MapQ1850( titanium : String ) -> String
+{
+    switch titanium {
+    case "$0": return "$0"
+    case "$0.00": return "$0"
+    case "$1-$30K": return "$1-$30k"
+    case "$30K-$75K": return "$30k-$75k"
+    case "$75K-$150K": return "$75k-$150k"
+    case "$150K+": return "$150k+"
+    case "$1-$30k": return "$1-$30k"
+    case "$30k-$75k": return "$30k-$75k"
+    case "$75k-$150k": return "$75k-$150k"
+    case "$150k+": return "$150k+"
+    case "Unknown": return "Unknown"
+    default: return "ERROR: \(titanium)"
+    }
+}
+
+func MapQ1851( titanium : String ) -> String
+{
+    switch titanium {
+    case "$0": return "$0"
+    case "$0.00": return "$0"
+    case "$1-$30K": return "$1-$30k"
+    case "$30K-$75K": return "$30k-$75k"
+    case "$75K-$150K": return "$75k-$150k"
+    case "$150K+": return "$150k+"
+    case "$1-$30k": return "$1-$30k"
+    case "$30k-$75k": return "$30k-$75k"
+    case "$75k-$150k": return "$75k-$150k"
+    case "$150k+": return "$150k+"
+    case "Unknown": return "Unknown"
+    default: return "ERROR: \(titanium)"
+    }
+}
+
+func MapQ3350( titanium : String ) -> String
+{
+    switch titanium {
+    case "Under $24250": return "Under $24,250"
+    case "$35201-$56300": return "$35,201-$56,300"
+    case "Over $56300": return "Over $56,300"
+    case "Unknown": return "Unknown"
+    case "$24251-$35200": return "$24,251-$35,200"
+    default: return "ERROR: \(titanium)"
+    }
+}
+
+func MapQ1852( titanium: String ) -> String
+{
+    switch( titanium )
+    {
+    case "Less Than High School": return "Less than HighSchool"
+    case "High School Degree": return "HighSchoolDegree/GED"
+    case "Vocational Schooling": return "Vocational Schooling"
+    case "Some College": return "Some College"
+    case "Some Graduate School": return "Some Graduate School"
+    case "Graduate Degree": return "Graduate Degree"
+    default: return "ERROR: \(titanium)"
+    }
+}
+
+func MapQ1855( titanium: String ) -> String
+{
+    switch( titanium )
+    {
+    case "Heterosexual Relationship": return "Heterosexual"
+    case "Same Sex Relationship": return "Same Sex"
+    default: return "ERROR: \(titanium)"
+    }
+}

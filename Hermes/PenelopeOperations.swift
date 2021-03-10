@@ -150,7 +150,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         }
         
         let notes : String = findClientContactEntry(who: person.ClientID).Address1 + " " + findClientContactEntry(who: person.ClientID).Address2
-        let mainCountry : String = person.q3680
+        let mainCountry : String = MapQ3680( titanium: person.q3680 )
         
         // Bool?
         var userDefinedCheckbox3 : String
@@ -216,19 +216,19 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
             userDefinedDropdown5 = ""
         }  
         
-        let userDefinedDropdown6 : String = MapQ1858( titanium : person.q1858 )
-        let userDefinedDropdown7 : String = person.q1850
-        let userDefinedDropdown8 : String = person.q1851
-        let userDefinedDropdown9 : String = person.q3350
-        let userDefinedDropdown10 : String = person.q1852
+        let userDefinedDropdown6  : String = MapQ1858( titanium : person.q1858 )
+        let userDefinedDropdown7  : String = MapQ1850( titanium: person.q1850 )
+        let userDefinedDropdown8  : String = MapQ1851( titanium: person.q1851 )
+        let userDefinedDropdown9  : String = MapQ3350( titanium: person.q3350 )
+        let userDefinedDropdown10 : String = MapQ1852( titanium: person.q1852 )
         let userDefinedDropdown11 : String = MapQ1854( titanium: person.q1854 )
-        let userDefinedDropdown12 : String = person.q1855
+        let userDefinedDropdown12 : String = MapQ1855( titanium: person.q1855 )
         
         let userDefinedText1 = findClientContactEntry(who: person.ClientID).FirstName + " " + findClientContactEntry(who: person.ClientID).MiddleName + " " + findClientContactEntry(who: person.ClientID).LastName
         
         let userDefinedText2 : String = String( findClientContactEntry(who: person.ClientID).ClientID )
         
-        let output : String = clientID + "," + name + "," +  lastName + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + indLanguage + "," + notes + "," + mainCountry + "," + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + userDefinedDropdown1 + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + "," + userDefinedDropdown6 + "," + userDefinedDropdown7 + "," + userDefinedDropdown8 + "," + userDefinedDropdown9 +  "," + userDefinedDropdown10 + "," + userDefinedDropdown11 + "," + userDefinedDropdown12 + "," + userDefinedText1 + "," + userDefinedText2 + "\n"
+        let output : String = clientID + "," + name + "," +  lastName + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + indLanguage + "," + notes + "," + mainCountry + "," + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + userDefinedDropdown1 + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + ",\"" + userDefinedDropdown6 + "\",\"" + userDefinedDropdown7 + "\",\"" + userDefinedDropdown8 + "\",\"" + userDefinedDropdown9 +  "\"," + userDefinedDropdown10 + "," + userDefinedDropdown11 + "," + userDefinedDropdown12 + "," + userDefinedText1 + "," + userDefinedText2 + "\n"
         
         
         fileStreamer.write( output )

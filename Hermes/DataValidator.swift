@@ -65,6 +65,8 @@ func MapQ1842( from: String ) -> String
     case "School": return "Shelter"
     case "OR Child Care": return "Outreach"
     case "OR Childcare" : return "Outreach"
+    case "No Response": return ""
+    case "<No Response>": return ""
     default: return "ERROR: \(from)"
     }
 }
@@ -174,8 +176,10 @@ func MapQ1847( language : String ) -> String
     switch language{
     case "English": return "English"
     case "Spanish": return "Spanish"
-    case "Both (English & Spanish)": return "Spanish"
+    case "Both (English & Spanish)": return "English & Spanish (both)"
+    case "Both (English/Spanish)": return "English & Spanish (both)"
     case "Other": return "Other"
+    case "No Response": return ""
     case "<No Response>": return ""
     default: return "ERROR: \(language)"
     }
@@ -187,8 +191,11 @@ func MapQ1848( language : String ) -> String
     case "English": return "English"
     case "Spanish": return "Spanish"
     case "Both (English & Spanish)": return "English & Spanish (both)"
+    case "Both (English/Spanish)": return "English & Spanish (both)"
     case "Other": return "Other"
+    case "No Response": return ""
     case "<No Response>": return ""
+    case "":return ""
     default: return "ERROR: \(language)"
     }
 }
@@ -199,6 +206,7 @@ func MapQ1849( titanium : String ) -> String
     case "Yes": return "Current Involvement"
     case "No": return "No Involvement"
     case "Previously": return "Previous Involvement"
+    case "No Response": return ""
     case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
@@ -209,11 +217,15 @@ func MapQ1853( titanium : String ) -> String
     switch titanium
     {
     case "Not employed": return "Not employed"
+    case "Not Employed": return "Not employed"
+    case "Employed Part-Time": return "Part-time"
     case "Employed part-time": return "Part-time"
     case "Full-time": return "Full-time"
     case "Full Time": return "Full-time"
     case "Full-Time": return "Full-time"
     case "2+ jobs": return "2+ jobs"
+    case "2+Jobs": return "2+ jobs"
+    case "No Response": return ""
     case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
@@ -224,7 +236,9 @@ func MapQ1854( titanium : String ) -> String
     switch titanium{
     case "Currently in a relationship with abuser": return "In a relationship with abuser"
     case "On and off relationship with abuser": return "On/off relationship with abuser"
+    case "On and Off relationship with abuser": return "On/off relationship with abuser"
     case "Terminated relationship with abuser": return "Ended relationship with abuser"
+    case "No Response": return ""
     case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
@@ -234,6 +248,7 @@ func MapQ1858( titanium : String ) -> String
 {
     switch titanium {
     case "Would not qualify at this time" : return "No and would not qualify"
+    case "would not qualitfy at this time" : return "No and would not qualify"
     case "Has applied" : return "No, but has applied"
     case "Has a protective order" : return "Yes, currently has a protective order"
     case "Does not have a protective order" : return "No"
@@ -241,8 +256,8 @@ func MapQ1858( titanium : String ) -> String
     case "has applied" : return "No, but has applied"
     case "has a protective order" : return "Yes, currently has a protective order"
     case "does not have a protective order" : return "No"
+    case "No Response": return ""
     case "<No Response>": return ""
-        
     default: return "ERROR: \(titanium)"
     }
 }
@@ -250,10 +265,21 @@ func MapQ1858( titanium : String ) -> String
 func MapQ1844( titanium : String ) -> String
 {
     switch titanium {
+    case "white" : return "Caucasian/White"
+    case "Caucasian/White" : return "Caucasian/White"
+    case "black" : return "African American/Black"
+    case "African American/Black" : return "African American/Black"
+    case "hispanic" : return "Hispanic/Latino"
+    case "Hispanic/Latino" : return "Hispanic/Latino"
+    case "Other" : return "Other"
+    case "other" : return "Other"
     case "White" : return "Caucasian/White"
     case "Black" : return "African American/Black"
     case "Hispanic" : return "Hispanic/Latino"
-    case "Other" : return "Other"
+    case "Asian/Pacific American": return "Asian/Pacific American"
+    case "2 or more races" : return "2 or more races"
+    case "Native American": return "Native American"
+    case "No Response": return ""
     case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
@@ -283,6 +309,8 @@ func MapQ1850( titanium : String ) -> String
     case "$75k-$150k": return "$75k-$150k"
     case "$150k+": return "$150k+"
     case "Unknown": return "Unknown"
+    case "No Response": return ""
+    case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
 }
@@ -302,6 +330,8 @@ func MapQ1851( titanium : String ) -> String
     case "$75k-$150k": return "$75k-$150k"
     case "$150k+": return "$150k+"
     case "Unknown": return "Unknown"
+    case "No Response": return ""
+    case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
 }
@@ -314,6 +344,9 @@ func MapQ3350( titanium : String ) -> String
     case "Over $56300": return "Over $56,300"
     case "Unknown": return "Unknown"
     case "$24251-$35200": return "$24,251-$35,200"
+    case "No Response": return ""
+    case "<No Response>": return ""
+    case "": return ""
     default: return "ERROR: \(titanium)"
     }
 }
@@ -326,8 +359,11 @@ func MapQ1852( titanium: String ) -> String
     case "High School Degree": return "HighSchoolDegree/GED"
     case "Vocational Schooling": return "Vocational Schooling"
     case "Some College": return "Some College"
+    case "College Degree": return "College Degree"
     case "Some Graduate School": return "Some Graduate School"
     case "Graduate Degree": return "Graduate Degree"
+    case "No Response": return ""
+    case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
 }
@@ -338,6 +374,8 @@ func MapQ1855( titanium: String ) -> String
     {
     case "Heterosexual Relationship": return "Heterosexual"
     case "Same Sex Relationship": return "Same Sex"
+    case "No Response": return ""
+    case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
     }
 }

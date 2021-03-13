@@ -133,6 +133,7 @@ func readTitaniumContactCSV(fileName: URL)
             let columns = row.components(separatedBy: ",")
             var contactEntry = TitaniumClientContact()
             contactEntry.ClientID   = Int(columns[TITANIUM_c_clientid])!
+            print("Processing \(contactEntry.ClientID)")
             contactEntry.FirstName  = columns[TITANIUM_c_firstname]
             contactEntry.MiddleName = columns[TITANIUM_c_middlename]
             contactEntry.LastName   = columns[TITANIUM_c_lastname]
@@ -142,7 +143,7 @@ func readTitaniumContactCSV(fileName: URL)
             contactEntry.OkToPhone2 = ( columns[TITANIUM_c_oktophone2] as NSString ).boolValue
             contactEntry.OkToPhone3 = ( columns[TITANIUM_c_oktophone3] as NSString ).boolValue
             contactEntry.Phone1     = stripPhoneNumber( number: columns[TITANIUM_c_phone1] )
-            assert( contactEntry.Phone1.count == 10 || contactEntry.Phone1.count == 0 , "Client \(contactEntry.ClientID) has a bad phone 1" )
+            assert( contactEntry.Phone1.count <= 10 || contactEntry.Phone1.count == 0 , "Client \(contactEntry.ClientID) has a bad phone 1" )
             contactEntry.Phone2     = stripPhoneNumber( number: columns[TITANIUM_c_phone2] )
             assert( contactEntry.Phone2.count == 10 || contactEntry.Phone2.count == 0, "Client \(contactEntry.ClientID) has a bad phone 2" )
             contactEntry.Phone3     = stripPhoneNumber( number: columns[TITANIUM_c_phone3] )
@@ -151,9 +152,11 @@ func readTitaniumContactCSV(fileName: URL)
             contactEntry.Address2   = columns[TITANIUM_c_address2]
             contactEntry.OkToHome   = ( columns[TITANIUM_c_oktohome] as NSString ).boolValue
             
-            // To print the date myDate.string(format: "yyyy-MM-dd")
-            let tempDate : Date = dateFormatterGet.date(from: columns[TITANIUM_c_birthdate] )!
-            contactEntry.BirthDate  = tempDate
+            if( columns[TITANIUM_c_birthdate] != "" && columns[TITANIUM_c_birthdate] != " ")
+            {
+                contactEntry.BirthDate = dateFormatterGet.date(from: columns[TITANIUM_c_birthdate] )!
+            }
+            
             contactEntry.Comment    = columns[TITANIUM_c_comment]
             TitaniumClientContactArray.append(contactEntry)
             print (columns)

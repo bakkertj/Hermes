@@ -124,7 +124,7 @@ func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDem
 func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic] )
 {
     var fileStreamer = FileStreamer( newFile : "Individuals.csv");
-
+    
     fileStreamer.write("uniqueIndId, firstName, middleInitial, lastName, title, gender, dateOfBirth, siteName, referral, safetyConcern, safetyConcernText, financialConcern, financialConcernText, partnerAware, homeAware, english, indLanguage, taxSchedule, idNum, nii, notes, mainAddress1, mainAddress2, mainCity, mainProvState, mainCounty, mainCountry, mainPcZip, funder, funderDept, userdefinedCountry, userDefinedCheckbox1, userDefinedCheckbox2, userDefinedCheckbox3, userDefinedCheckbox4, userDefinedCheckbox5, userDefinedCheckbox6, userDefinedCheckbox7,   userDefinedDate1, userDefinedDate2, userDefinedDate3, userDefinedDate4, userDefinedDate5, userDefinedDate6, userDefinedDate7, userDefinedDropdown1, userDefinedDropdown2, userDefinedDropdown3, userDefinedDropdown4, userDefinedDropdown5, userDefinedDropdown6, userDefinedDropdown7, userDefinedDropdown8, userDefinedDropdown9, userDefinedDropdown10, userDefinedDropdown11, userDefinedDropdown12, userDefinedMemo1, userDefinedMemo2, userDefinedMemo3, userDefinedMemo4, userDefinedMemo5, userDefinedMemo6, userDefinedText1, userDefineText2, userDefineText3, userDefineText4, userDefineText5, userDefineText6, userDefineText7, userDefineText8, workIdentNo, workName, workContact, workAddress1, workAddress2, workCity, workProvState, workCountry, workPzip,workUrl, workComments\n" )
     //writing
     for person in fromDemographics
@@ -139,15 +139,12 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         
         let siteName : String = MapQ1842( from: person.q1842 )
         var referral : String = "ERROR"
-        if( ValidateLanguage( language : MapQ1848( language: person.q1848 ) ) )
-        {
-            referral = MapQ1847( language: person.q1848)
-        }
-        var indLanguage : String = "ERROR"
-        if( ValidateLanguage( language : MapQ1847( language: person.q1847 ) ) )
-        {
-            indLanguage = MapQ1847( language: person.q1847)
-        }
+        
+        referral = MapQ1848( language: person.q1848)
+        
+        var indLanguage : String = "ERROR: \(person.q1848)"
+        
+        indLanguage = MapQ1847( language: person.q1847)
         
         let notes : String = findClientContactEntry(who: person.ClientID).Address1 + " " + findClientContactEntry(who: person.ClientID).Address2
         let mainCounty : String = MapQ3680( titanium: person.q3680 )
@@ -174,7 +171,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         let userDefinedDropdown4 : String = MapQ1853( titanium: person.q1853 )
         
         var userDefinedDropdown5 : String = ""
-    
+        
         if( person.q1857a2689)
         {
             userDefinedDropdown5 = "0"
@@ -230,7 +227,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         
         let output : String = clientID + "," + name + "," + " " + "," + lastName + " , " + " " + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + indLanguage + "," + " " + "," + " " + "," + " " + "," + notes + "," + " " + "," + " " + "," + " " + "," + " " + "," + mainCounty + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedDropdown1 + "," + " " + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + ",\"" + userDefinedDropdown6 + "\",\"" + userDefinedDropdown7 + "\",\"" + userDefinedDropdown8 + "\",\"" + userDefinedDropdown9 +  "\",\"" + userDefinedDropdown10 + "\",\"" + userDefinedDropdown11 + "\",\"" + userDefinedDropdown12 + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedText1 + "," + userDefinedText2 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
         
-        
+        print("Writing \(clientID)")
         fileStreamer.write( output )
     }
 }

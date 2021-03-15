@@ -65,8 +65,8 @@ func MapQ1842( from: String ) -> String
     case "School": return "Shelter"
     case "OR Child Care": return "Outreach"
     case "OR Childcare" : return "Outreach"
-    case "No Response": return ""
-    case "<No Response>": return ""
+    case "No Response": return "Outreach"
+    case "<No Response>": return "Outreach"
     default: return "ERROR: \(from)"
     }
 }

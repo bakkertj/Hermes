@@ -111,6 +111,8 @@ func readTitaniumContactCSV(fileName: URL)
     let dateFormatterGet = DateFormatter()
     dateFormatterGet.dateFormat = "yyyy-MM-dd"
     dateFormatterGet.locale = Locale(identifier: "en_US")
+    
+    print("OPENING \(fileName)")
   
     do
     {
@@ -130,6 +132,7 @@ func readTitaniumContactCSV(fileName: URL)
     {
         if( headerRead == true )
         {
+            print("OPENING \(fileName)")
             let columns = row.components(separatedBy: ",")
             var contactEntry = TitaniumClientContact()
             contactEntry.ClientID   = Int(columns[TITANIUM_c_clientid])!

@@ -73,3 +73,11 @@ let TITANIUM_h_clientid = 0
 let TITANIUM_h_fname    = 5
 let TITANIUM_h_mname    = 6
 let TITANIUM_h_lname    = 7
+
+let TITANIUM_cis_clientid  = 0
+let TITANIUM_cis_fname     = 5
+let TITANIUM_cis_mname     = 6
+let TITANIUM_cis_lname     = 7
+let TITANIUM_cis_ethnicity = 19
+let TITANIUM_cis_gender    = 20
+

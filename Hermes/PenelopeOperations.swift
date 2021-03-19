@@ -123,7 +123,7 @@ func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDem
 
 var excludeList : [String] = [String]()
 
-func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic], fromHotline : [TitaniumHotline] )
+func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic], fromCIS: [TitaniumCIS], fromHotline : [TitaniumHotline] )
 {
     var fileStreamer = FileStreamer( newFile : "Individuals.csv");
     
@@ -260,6 +260,26 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         
        // print("Writing \(clientID)")
         fileStreamer.write( output )
+    }
+    
+    var cisDict : [ Int : TitaniumCIS ] = [ Int : TitaniumCIS ]()
+    for cisEntry in fromCIS
+    {
+        cisDict[ cisEntry.ClientID ] = cisEntry
+    }
+    
+    for cisEntry in cisDict.values
+    {
+        if( excludeList.contains( String(cisEntry.ClientID) ) == false )
+        {
+            print("Found a missing \(cisEntry.ClientID)")
+            let name     = cisEntry.FName + " " + cisEntry.MName
+            let lastName = cisEntry.LName
+            let output : String = String(cisEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Shelter" + "," + " " + "," + " " + "," + " "
+                + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
+            
+            fileStreamer.write( output )
+        }
     }
     
     

@@ -267,8 +267,11 @@ func MapQ1844( titanium : String ) -> String
     switch titanium {
     case "white" : return "Caucasian/White"
     case "Caucasian/White" : return "Caucasian/White"
+    case "Anglo American / White" : return "Caucasian/White"
     case "black" : return "African American/Black"
     case "African American/Black" : return "African American/Black"
+    case "African American / Black" : return "African American/Black"
+    case "Hispanic American / Latino" : return "Hispanic/Latino"
     case "hispanic" : return "Hispanic/Latino"
     case "Hispanic/Latino" : return "Hispanic/Latino"
     case "Other" : return "Other"
@@ -281,6 +284,8 @@ func MapQ1844( titanium : String ) -> String
     case "Native American": return "Native American"
     case "No Response": return ""
     case "<No Response>": return ""
+    case "" : return ""
+    case " " : return ""
     default: return "ERROR: \(titanium)"
     }
 }

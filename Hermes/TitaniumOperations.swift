@@ -35,6 +35,47 @@ func findDemographicEntry( who : Int ) -> TitaniumDemographic
     return bad
 }
 
+func readTitaniumCISCSV(fileName: URL )
+{
+    var data : String = ""
+    
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd"
+    dateFormatterGet.locale = Locale(identifier: "en_US")
+  
+    do
+    {
+        data = try String(contentsOf: fileName, encoding: .utf8)
+    }
+    catch
+    {
+        print("Error opening file \(fileName.path)")
+    }
+    
+    let rows = data.components(separatedBy: "\n")
+    var headerRead : Bool = false
+    
+    var rowCount : Int = 0
+
+    for row in rows
+    {
+        if( headerRead == true )
+        {
+            let columns = row.components(separatedBy: ",")
+            var cisEntry = TitaniumCIS()
+            cisEntry.ClientID = Int(columns[TITANIUM_cis_clientid])!
+            cisEntry.FName = columns[TITANIUM_cis_fname]
+            cisEntry.MName = columns[TITANIUM_cis_mname]
+            cisEntry.LName = columns[TITANIUM_cis_lname]
+            cisEntry.Ethnicity = MapQ1844( titanium: columns[TITANIUM_cis_ethnicity])
+
+            TitaniumCISArray.append( cisEntry )
+        }
+        headerRead = true;
+        rowCount  += 1;
+    }
+}
+
 func readTitaniumHotlineCSV(fileName: URL )
 {
     var data : String = ""
@@ -46,7 +87,6 @@ func readTitaniumHotlineCSV(fileName: URL )
     do
     {
         data = try String(contentsOf: fileName, encoding: .utf8)
-        print("Opened file")
     }
     catch
     {
@@ -57,7 +97,7 @@ func readTitaniumHotlineCSV(fileName: URL )
     var headerRead : Bool = false
     
     var rowCount : Int = 0
-    print("Rows: \(rows.count)")
+
     for row in rows
     {
         if( headerRead == true )
@@ -68,7 +108,6 @@ func readTitaniumHotlineCSV(fileName: URL )
             hotlineEntry.FName = columns[TITANIUM_h_fname]
             hotlineEntry.MName = columns[TITANIUM_h_mname]
             hotlineEntry.LName = columns[TITANIUM_h_lname]
-            print("Reading \(hotlineEntry)")
             TitaniumHotlineArray.append( hotlineEntry )
         }
         headerRead = true;

@@ -82,6 +82,16 @@ for file in titaniumFiles
     readTitaniumDemographicCSV( fileName:file )
 }
 
+titaniumFiles.removeAll()
+
+titaniumDirectory.path = titaniumOption + "/CIS"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumCISCSV( fileName:file )
+}
+
 
 titaniumFiles.removeAll()
 
@@ -93,7 +103,7 @@ for file in titaniumFiles
     readTitaniumHotlineCSV( fileName:file )
 }
 
-writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromHotline: TitaniumHotlineArray )
+writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray )
 //writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray)
 
 NSSound.beep()

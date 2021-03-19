@@ -35,6 +35,50 @@ func findDemographicEntry( who : Int ) -> TitaniumDemographic
     return bad
 }
 
+func readTitaniumHotlineCSV(fileName: URL )
+{
+    var data : String = ""
+    
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd"
+    dateFormatterGet.locale = Locale(identifier: "en_US")
+  
+    do
+    {
+        data = try String(contentsOf: fileName, encoding: .utf8)
+        print("Opened file")
+    }
+    catch
+    {
+        print("Error opening file \(fileName.path)")
+    }
+    
+    let rows = data.components(separatedBy: "\n")
+    var headerRead : Bool = false
+    
+    var rowCount : Int = 0
+    print("Rows: \(rows.count)")
+    for row in rows
+    {
+        if( headerRead == true )
+        {
+            let columns = row.components(separatedBy: ",")
+            var hotlineEntry = TitaniumHotline()
+            hotlineEntry.ClientID = Int(columns[TITANIUM_h_clientid])!
+            hotlineEntry.FName = columns[TITANIUM_h_fname]
+            hotlineEntry.MName = columns[TITANIUM_h_mname]
+            hotlineEntry.LName = columns[TITANIUM_h_lname]
+            print("Reading \(hotlineEntry)")
+            TitaniumHotlineArray.append( hotlineEntry )
+        }
+        headerRead = true;
+        rowCount  += 1;
+    }
+    
+}
+
+
+
 func readTitaniumDemographicCSV(fileName: URL)
 {
     var data : String = ""
@@ -64,6 +108,7 @@ func readTitaniumDemographicCSV(fileName: URL)
             let columns = row.components(separatedBy: ",")
             var demographicEntry = TitaniumDemographic()
             demographicEntry.ClientID = Int(columns[TITANIUM_clientid])!
+            
             demographicEntry.FName = columns[TITANIUM_fname]
             demographicEntry.MName = columns[TITANIUM_mname]
             demographicEntry.LName = columns[TITANIUM_lname]
@@ -97,7 +142,6 @@ func readTitaniumDemographicCSV(fileName: URL)
             demographicEntry.q3682 = ( columns[TITANIUM_q3682] as NSString ).boolValue
 
             TitaniumDemographicArray.append(demographicEntry)
-            print (columns)
         }
         headerRead = true;
         rowCount += 1
@@ -133,7 +177,7 @@ func readTitaniumContactCSV(fileName: URL)
             let columns = row.components(separatedBy: ",")
             var contactEntry = TitaniumClientContact()
             contactEntry.ClientID   = Int(columns[TITANIUM_c_clientid])!
-            print("Processing \(contactEntry.ClientID)")
+
             contactEntry.FirstName  = columns[TITANIUM_c_firstname]
             contactEntry.MiddleName = columns[TITANIUM_c_middlename]
             contactEntry.LastName   = columns[TITANIUM_c_lastname]
@@ -159,7 +203,7 @@ func readTitaniumContactCSV(fileName: URL)
             
             contactEntry.Comment    = columns[TITANIUM_c_comment]
             TitaniumClientContactArray.append(contactEntry)
-            print (columns)
+           
         }
         headerRead = true;
         rowCount += 1

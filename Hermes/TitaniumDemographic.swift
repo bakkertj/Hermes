@@ -60,9 +60,9 @@ struct TitaniumDemographic
         RecordType = ""
         NoteDate = Date()
         NoteType = ""
-        FName   = ""
+        FName   = "FNU"
         MName = ""
-        LName = ""
+        LName = "LNU"
         Email = ""
         q1842 = ""
         q1844 = ""

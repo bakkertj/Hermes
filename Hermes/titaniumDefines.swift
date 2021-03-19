@@ -68,3 +68,8 @@ let TITANIUM_q3679 = 37
 let TITANIUM_q3680 = 38
 let TITANIUM_q3682 = 39
 let TITANIUM_q4793 = 40
+
+let TITANIUM_h_clientid = 0
+let TITANIUM_h_fname    = 5
+let TITANIUM_h_mname    = 6
+let TITANIUM_h_lname    = 7

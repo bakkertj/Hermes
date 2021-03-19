@@ -7,6 +7,7 @@
 
 import Foundation
 import ArgumentParser
+import AppKit
 
 var titaniumOption: String = ""
 var clioOption: String = ""
@@ -81,6 +82,20 @@ for file in titaniumFiles
     readTitaniumDemographicCSV( fileName:file )
 }
 
-writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray)
-writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray)
+
+titaniumFiles.removeAll()
+
+titaniumDirectory.path = titaniumOption + "/Hotline"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumHotlineCSV( fileName:file )
+}
+
+writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromHotline: TitaniumHotlineArray )
+//writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray)
+
+NSSound.beep()
+print("Done!")
 

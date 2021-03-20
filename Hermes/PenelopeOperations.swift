@@ -141,7 +141,9 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
     print("Number of records is \(fromDemographics.count)")
     print("Number of client contacts is \(fromContacts.count)")
     print("Number of unique clients is \(personDict.count)")
+    var count : Int = 0
     
+    var demographicCount : Int = 0
     for person in personDict.values
     {
         let df = DateFormatter()
@@ -256,11 +258,14 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
 
         let userDefinedText2 : String = String( findClientContactEntry(who: person.ClientID).ClientID )
         
-        let userDefinedMemo1 : String = findClientContactEntry(who: person.ClientID).Comment
+        let userDefinedMemo1 : String = findClientContactEntry(who: person.ClientID).Comment.replacingOccurrences(of: ",", with: " ")
 
+        count = count + 1
+        
         let output : String = clientID + "," + name + "," + " " + "," + lastName + " , " + " " + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + indLanguage + "," + " " + "," + " " + "," + " " + "," + notes + "," + " " + "," + " " + "," + " " + "," + " " + "," + mainCounty + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedDropdown1 + "," + " " + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + ",\"" + userDefinedDropdown6 + "\",\"" + userDefinedDropdown7 + "\",\"" + userDefinedDropdown8 + "\",\"" + userDefinedDropdown9 +  "\",\"" + userDefinedDropdown10 + "\",\"" + userDefinedDropdown11 + "\",\"" + userDefinedDropdown12 + "\"," + userDefinedMemo1 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedText1 + "," + userDefinedText2 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
 
         fileStreamer.write( output )
+        demographicCount += 1
     }
     
     var clientDict : [ Int : TitaniumClientContact ] = [ Int : TitaniumClientContact ]()
@@ -269,11 +274,13 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         clientDict[ clientEntry.ClientID ] = clientEntry
     }
     
+    var clientCount : Int = 0
     for clientEntry in clientDict.values
     {
         if( excludeList.contains( String(clientEntry.ClientID) ) == false )
         {
-            print("Found a ClientContact \(clientEntry.ClientID)")
+            count = count + 1
+     //       print("Found a ClientContact \(clientEntry.ClientID)")
             excludeList.append(String(clientEntry.ClientID))
             let name     = clientEntry.FirstName + " " + clientEntry.MiddleName
             let lastName = clientEntry.LastName
@@ -281,22 +288,26 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
             fileStreamer.write( output )
+            clientCount = clientCount + 1
+
         }
     }
     
     var cisDict : [ Int : TitaniumCIS ] = [ Int : TitaniumCIS ]()
     for cisEntry in fromCIS
     {
-        print("Adding \(cisEntry.ClientID)")
+    //    print("Adding \(cisEntry.ClientID)")
         cisDict[ cisEntry.ClientID ] = cisEntry
     }
     
   
+    var cisCount : Int = 0
     for cisEntry in cisDict.values
     {
         if( excludeList.contains( String(cisEntry.ClientID) ) == false )
         {
-            print("Found a CIS \(cisEntry.ClientID)")
+            count = count + 1
+        //    print("Found a CIS \(cisEntry.ClientID)")
             excludeList.append(String(cisEntry.ClientID))
             let name     = cisEntry.FName + " " + cisEntry.MName
             let lastName = cisEntry.LName
@@ -304,6 +315,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
             fileStreamer.write( output )
+            cisCount = cisCount + 1
         }
     }
 
@@ -316,19 +328,27 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         hotlineDict[ hotline.ClientID ] = hotline;
     }
     
+    var hotlineCount : Int = 0
     
     for hotline in hotlineDict.values
     {
         if( excludeList.contains( String(hotline.ClientID) ) == false )
         {
-            print("Adding hotline \(hotline.ClientID)")
+            count = count + 1
+ 
             let name     = hotline.FName + " " + hotline.MName
             let lastName = hotline.LName
             let output : String = String(hotline.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Shelter" + "," + " " + "," + " " + "," + " "
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
             fileStreamer.write( output )
+            hotlineCount = hotlineCount + 1
         }
         
     }
+    print("Wrote \(count) Total Records")
+    print("Demographic Count: \(demographicCount)")
+    print("Client Count     : \(clientCount)")
+    print("CIS Count        : \(cisCount)")
+    print("Hotline Count    : \(hotlineCount)")
 }

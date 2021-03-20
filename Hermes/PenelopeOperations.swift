@@ -254,9 +254,9 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         let userDefinedDropdown11 : String = MapQ1854( titanium: person.q1854 )
         let userDefinedDropdown12 : String = MapQ1855( titanium: person.q1855 )
 
-        let userDefinedText1 = findClientContactEntry(who: person.ClientID).FirstName + " " + findClientContactEntry(who: person.ClientID).MiddleName + " " + findClientContactEntry(who: person.ClientID).LastName
+        let userDefinedText1 = name + " " + lastName
 
-        let userDefinedText2 : String = String( findClientContactEntry(who: person.ClientID).ClientID )
+        let userDefinedText2 : String = clientID
         
         let userDefinedMemo1 : String = findClientContactEntry(who: person.ClientID).Comment.replacingOccurrences(of: ",", with: " ")
 
@@ -347,8 +347,8 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         
     }
     print("Wrote \(count) Total Records")
-    print("Demographic Count: \(demographicCount)")
-    print("Client Count     : \(clientCount)")
-    print("CIS Count        : \(cisCount)")
-    print("Hotline Count    : \(hotlineCount)")
+    print("Demographic Count        : \(demographicCount)")
+    print("Client Contact Count     : \(clientCount)")
+    print("CIS Count                : \(cisCount)")
+    print("Hotline Count            : \(hotlineCount)")
 }

@@ -20,6 +20,9 @@
 		DA8886AB25F3E16100CDDBEB /* titaniumArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886A925F3E16100CDDBEB /* titaniumArray.swift */; };
 		DA8886AF25F5182200CDDBEB /* TitaniumDemographic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */; };
 		DA8886B325F57B3700CDDBEB /* PenelopeOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8886B225F57B3700CDDBEB /* PenelopeOperations.swift */; };
+		DAD2750A2606810100156BAF /* ClioMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD275092606810100156BAF /* ClioMatter.swift */; };
+		DAD2750D26068C7100156BAF /* ClioOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2750C26068C7100156BAF /* ClioOperations.swift */; };
+		DAD275102606B23300156BAF /* ClioContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2750F2606B23300156BAF /* ClioContact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +51,9 @@
 		DA8886A925F3E16100CDDBEB /* titaniumArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = titaniumArray.swift; sourceTree = "<group>"; };
 		DA8886AE25F5182200CDDBEB /* TitaniumDemographic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitaniumDemographic.swift; sourceTree = "<group>"; };
 		DA8886B225F57B3700CDDBEB /* PenelopeOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenelopeOperations.swift; sourceTree = "<group>"; };
+		DAD275092606810100156BAF /* ClioMatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClioMatter.swift; sourceTree = "<group>"; };
+		DAD2750C26068C7100156BAF /* ClioOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClioOperations.swift; sourceTree = "<group>"; };
+		DAD2750F2606B23300156BAF /* ClioContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClioContact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				DA88868D25F3388E00CDDBEB /* main.swift */,
+				DAD2750C26068C7100156BAF /* ClioOperations.swift */,
 				DA8886A525F3DC0900CDDBEB /* DataValidator.swift */,
 				DA88869525F338D800CDDBEB /* FileOps.swift */,
 				DA88869C25F348F300CDDBEB /* FileStreamer.swift */,
@@ -93,6 +100,8 @@
 				DA2F6C462604336300365EFD /* TitaniumHotline.swift */,
 				DA2F6C4C2604509C00365EFD /* TitaniumCIS.swift */,
 				DA8886B225F57B3700CDDBEB /* PenelopeOperations.swift */,
+				DAD275092606810100156BAF /* ClioMatter.swift */,
+				DAD2750F2606B23300156BAF /* ClioContact.swift */,
 			);
 			path = Hermes;
 			sourceTree = "<group>";
@@ -160,14 +169,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD275102606B23300156BAF /* ClioContact.swift in Sources */,
 				DA8886AB25F3E16100CDDBEB /* titaniumArray.swift in Sources */,
 				DA8886A325F3DB1C00CDDBEB /* TitaniumClientContact.swift in Sources */,
 				DA2F6C4D2604509C00365EFD /* TitaniumCIS.swift in Sources */,
 				DA8886AA25F3E16100CDDBEB /* titaniumDefines.swift in Sources */,
 				DA2F6C472604336300365EFD /* TitaniumHotline.swift in Sources */,
 				DA8886B325F57B3700CDDBEB /* PenelopeOperations.swift in Sources */,
+				DAD2750D26068C7100156BAF /* ClioOperations.swift in Sources */,
 				DA88869625F338D800CDDBEB /* FileOps.swift in Sources */,
 				DA8886A625F3DC0900CDDBEB /* DataValidator.swift in Sources */,
+				DAD2750A2606810100156BAF /* ClioMatter.swift in Sources */,
 				DA8886AF25F5182200CDDBEB /* TitaniumDemographic.swift in Sources */,
 				DA88869D25F348F300CDDBEB /* FileStreamer.swift in Sources */,
 				DA8886A025F3C7AF00CDDBEB /* TitaniumOperations.swift in Sources */,

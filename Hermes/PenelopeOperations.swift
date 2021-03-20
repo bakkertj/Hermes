@@ -123,7 +123,7 @@ func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDem
 
 var excludeList : [String] = [String]()
 
-func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic], fromHotline : [TitaniumHotline] )
+func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic], fromCIS: [TitaniumCIS], fromHotline : [TitaniumHotline] )
 {
     var fileStreamer = FileStreamer( newFile : "Individuals.csv");
     
@@ -150,45 +150,45 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         let clientID : String = String(person.ClientID)
         
         excludeList.append( clientID )
-        
+
         var name : String = findClientContactEntry(who: person.ClientID).FirstName + " " + findClientContactEntry(who: person.ClientID).MiddleName
 
         var lastName : String = findClientContactEntry(who: person.ClientID).LastName
-        
+
         if( name == " " )
         {
             name = person.FName + " " + person.MName
             lastName = person.LName
         }
-        
+
         let birthDate : String = df.string(from: findClientContactEntry(who: person.ClientID).BirthDate)
-        
+
         let siteName : String = MapQ1842( from: person.q1842 )
         var referral : String = "ERROR"
-        
+
         referral = MapQ1848( language: person.q1848)
-        
+
         var indLanguage : String = "ERROR: \(person.q1848)"
-        
+
         indLanguage = MapQ1847( language: person.q1847)
-        
+
         var notes : String = findClientContactEntry(who: person.ClientID).Address1 + " " + findClientContactEntry(who: person.ClientID).Address2
-        
+
         notes = notes.replacingOccurrences( of: "\n", with: " ")
         notes = notes.replacingOccurrences( of: "\r", with: " ")
-      
-        
+
+
         let mainCounty : String = MapQ3680( titanium: person.q3680 )
-        
+
         // Bool?
         var userDefinedCheckbox3 : String
         userDefinedCheckbox3 = String( person.q3682).uppercased()
-        
+
         var userDefinedCheckbox4 : String
         userDefinedCheckbox4 = String( person.q1856).uppercased()
-        
+
         var userDefinedDropdown1 : String
-        
+
         if( person.q1844 != "" )
         {
             userDefinedDropdown1 = MapQ1844( titanium: person.q1844 )
@@ -197,12 +197,12 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         {
             userDefinedDropdown1 = MapQ1844( titanium: person.q3679 )
         }
-        
+
         let userDefinedDropdown3 : String = MapQ1849( titanium: person.q1849 )
         let userDefinedDropdown4 : String = MapQ1853( titanium: person.q1853 )
-        
+
         var userDefinedDropdown5 : String = ""
-        
+
         if( person.q1857a2689)
         {
             userDefinedDropdown5 = "0"
@@ -242,8 +242,8 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         else if ( person.q1857a3642 )
         {
             userDefinedDropdown5 = ""
-        }  
-        
+        }
+
         let userDefinedDropdown6  : String = MapQ1858( titanium: person.q1858 )
         let userDefinedDropdown7  : String = MapQ1850( titanium: person.q1850 )
         let userDefinedDropdown8  : String = MapQ1851( titanium: person.q1851 )
@@ -251,20 +251,63 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         let userDefinedDropdown10 : String = MapQ1852( titanium: person.q1852 )
         let userDefinedDropdown11 : String = MapQ1854( titanium: person.q1854 )
         let userDefinedDropdown12 : String = MapQ1855( titanium: person.q1855 )
-        
+
         let userDefinedText1 = findClientContactEntry(who: person.ClientID).FirstName + " " + findClientContactEntry(who: person.ClientID).MiddleName + " " + findClientContactEntry(who: person.ClientID).LastName
-        
+
         let userDefinedText2 : String = String( findClientContactEntry(who: person.ClientID).ClientID )
-        
+
         let output : String = clientID + "," + name + "," + " " + "," + lastName + " , " + " " + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + indLanguage + "," + " " + "," + " " + "," + " " + "," + notes + "," + " " + "," + " " + "," + " " + "," + " " + "," + mainCounty + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedDropdown1 + "," + " " + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + ",\"" + userDefinedDropdown6 + "\",\"" + userDefinedDropdown7 + "\",\"" + userDefinedDropdown8 + "\",\"" + userDefinedDropdown9 +  "\",\"" + userDefinedDropdown10 + "\",\"" + userDefinedDropdown11 + "\",\"" + userDefinedDropdown12 + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedText1 + "," + userDefinedText2 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
-        
-       // print("Writing \(clientID)")
+
         fileStreamer.write( output )
+    }
+    
+    var clientDict : [ Int : TitaniumClientContact ] = [ Int : TitaniumClientContact ]()
+    for clientEntry in fromContacts
+    {
+        clientDict[ clientEntry.ClientID ] = clientEntry
+    }
+    
+    for clientEntry in clientDict.values
+    {
+        if( excludeList.contains( String(clientEntry.ClientID) ) == false )
+        {
+            print("Found a missing \(clientEntry.ClientID)")
+            excludeList.append(String(clientEntry.ClientID))
+            let name     = clientEntry.FirstName + " " + clientEntry.MiddleName
+            let lastName = clientEntry.LastName
+            let output : String = String(clientEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Shelter" + "," + " " + "," + " " + "," + " "
+                + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
+            
+            fileStreamer.write( output )
+        }
+    }
+    
+    var cisDict : [ Int : TitaniumCIS ] = [ Int : TitaniumCIS ]()
+    for cisEntry in fromCIS
+    {
+        print("Adding \(cisEntry.ClientID)")
+        cisDict[ cisEntry.ClientID ] = cisEntry
+    }
+    
+  
+    for cisEntry in cisDict.values
+    {
+        if( excludeList.contains( String(cisEntry.ClientID) ) == false )
+        {
+            print("Found a missing \(cisEntry.ClientID)")
+            excludeList.append(String(cisEntry.ClientID))
+            let name     = cisEntry.FName + " " + cisEntry.MName
+            let lastName = cisEntry.LName
+            let output : String = String(cisEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Shelter" + "," + " " + "," + " " + "," + " "
+                + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
+            
+            fileStreamer.write( output )
+        }
     }
     
     
     //var hotlineDict : [ Int : TitaniumHotline ] = [ Int : TitaniumHotline ]()
-    print("Checking \(fromHotline.count)")
+    
     
     var hotlineDict : [ Int : TitaniumHotline ] = [ Int : TitaniumHotline ]()
     
@@ -278,6 +321,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
     {
         if( excludeList.contains( String(hotline.ClientID) ) == false )
         {
+            print("Adding hotline \(hotline.ClientID)")
             let name     = hotline.FName + " " + hotline.MName
             let lastName = hotline.LName
             let output : String = String(hotline.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Shelter" + "," + " " + "," + " " + "," + " "

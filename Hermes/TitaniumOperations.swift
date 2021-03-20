@@ -247,6 +247,7 @@ func readTitaniumContactCSV(fileName: URL)
         headerRead = true;
         rowCount += 1
     }
+    
 }
 
 func generateTitaniumDefines(fileName: URL)

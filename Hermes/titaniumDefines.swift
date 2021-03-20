@@ -81,3 +81,28 @@ let TITANIUM_cis_lname     = 7
 let TITANIUM_cis_ethnicity = 19
 let TITANIUM_cis_gender    = 20
 
+let CLIO_matter_description = 4
+let CLIO_matter_clientname = 6
+let CLIO_matter_opendate = 12
+let CLIO_matter_closedate = 13
+let CLIO_userdefinednotes = 0
+let CLIO_responsibleattorney = 23
+let CLIO_familycasenumber = 28
+let CLIO_opposingpartydob = 29
+let CLIO_opposingparty = 30
+let CLIO_opposingpartyphonenumber = 33
+let CLIO_familycourtnumber = 31
+
+let CLIO_contact_name = 1
+let CIO_contact_phonenumber = 2
+let CLIO_contact_address = 4
+let CLIO_contact_city = 5
+let CLIO_contact_state = 6
+let CLIO_contact_zipcode = 7
+let CLIO_contact_country = 8
+let CLIO_contact_notes = 9
+let CLIO_contact_clientid = 10
+let CLIO_contact_immigration = 11
+let CLIO_contact_language = 12
+let CLIO_contact_race = 13
+

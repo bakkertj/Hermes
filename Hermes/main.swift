@@ -47,63 +47,76 @@ clioDirectory.path     = clioOption
 outputDirectory.path   = outputOption
 
 
-if ( generateFilesOption == true )
+//if ( generateFilesOption == true )
+//{
+//    getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+//
+//    for file in titaniumFiles
+//    {
+//        generateTitaniumDefines( fileName:file )
+//    }
+//
+//    getFilesFromDirectory(directory:clioDirectory,      fileList:&clioFiles )
+//
+//    for file in clioFiles
+//    {
+//        generateClioDefines( fileName:file )
+//    }
+//}
+//
+//titaniumDirectory.path = titaniumOption + "/ClientContact"
+//getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+//
+//for file in titaniumFiles
+//{
+//    readTitaniumContactCSV( fileName:file )
+//}
+//
+//titaniumFiles.removeAll()
+//
+//titaniumDirectory.path = titaniumOption + "/Demographic"
+//getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+//
+//for file in titaniumFiles
+//{
+//    readTitaniumDemographicCSV( fileName:file )
+//}
+//
+//titaniumFiles.removeAll()
+//
+//titaniumDirectory.path = titaniumOption + "/CIS"
+//getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+//
+//for file in titaniumFiles
+//{
+//    readTitaniumCISCSV( fileName:file )
+//}
+//
+//
+//titaniumFiles.removeAll()
+//
+//titaniumDirectory.path = titaniumOption + "/Hotline"
+//getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+//
+//for file in titaniumFiles
+//{
+//    readTitaniumHotlineCSV( fileName:file )
+//}
+
+
+clioFiles.removeAll()
+
+clioDirectory.path = clioOption + "/matters"
+getFilesFromDirectory(directory:clioDirectory,  fileList:&clioFiles )
+
+for file in clioFiles
 {
-    getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-    
-    for file in titaniumFiles
-    {
-        generateTitaniumDefines( fileName:file )
-    }
-    
-    getFilesFromDirectory(directory:clioDirectory,      fileList:&clioFiles )
-    
-    for file in clioFiles
-    {
-        generateClioDefines( fileName:file )
-    }
+    readClioMattersCSV( fileName:file )
 }
 
-titaniumDirectory.path = titaniumOption + "/ClientContact"
-getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-
-for file in titaniumFiles
-{
-    readTitaniumContactCSV( fileName:file )
-}
-
-titaniumFiles.removeAll()
-
-titaniumDirectory.path = titaniumOption + "/Demographic"
-getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-
-for file in titaniumFiles
-{
-    readTitaniumDemographicCSV( fileName:file )
-}
-
-titaniumFiles.removeAll()
-
-titaniumDirectory.path = titaniumOption + "/CIS"
-getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-
-for file in titaniumFiles
-{
-    readTitaniumCISCSV( fileName:file )
-}
 
 
-titaniumFiles.removeAll()
-
-titaniumDirectory.path = titaniumOption + "/Hotline"
-getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-
-for file in titaniumFiles
-{
-    readTitaniumHotlineCSV( fileName:file )
-}
-
-writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray )
+//writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray )
 //writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray)
 
 NSSound.beep()

@@ -127,11 +127,15 @@ for file in clioFiles
 }
 
 
-//writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray )
+writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray )
 
-//writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray, fromClio: ClioContactArray )
+writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray, fromClio: ClioContactArray )
 
 writePenelopeServiceFile( fromClioMatters: ClioMatterArray )
+writePenelopeClioCaseFile( fromClioMatters: ClioMatterArray, fromClioContacts: ClioContactArray )
+writePenelopeClioCaseMembersFile( fromClioMatters: ClioMatterArray, fromClioContacts: ClioContactArray )
+writePenelopeClioServiceMembersFile( fromClioMatters: ClioMatterArray, fromClioContacts: ClioContactArray )
+writePenelopeClioServiceWorkerFile( fromClioMatters: ClioMatterArray, fromClioContacts: ClioContactArray )
 
 NSSound.beep()
 print("Done!")

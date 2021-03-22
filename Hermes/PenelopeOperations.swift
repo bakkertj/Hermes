@@ -7,6 +7,92 @@
 
 import Foundation
 
+func writePenelopeClioServiceWorkerFile( fromClioMatters: [ClioMatter], fromClioContacts: [ClioContact])
+{
+    var fileStreamer = FileStreamer( newFile : "Service File Workers.csv");
+    
+    fileStreamer.write("uniqueServiceFileId, uniqueWorkerId, attendingWorker, primaryWorker \n")
+    
+    for matter in fromClioMatters
+    {
+        var clientID : Int = -1
+        
+        for client in ClioContactArray
+        {
+            if( client.Name == matter.ClientName )
+            {
+                clientID = client.ClientID
+                break
+            }
+        }
+        
+        let attorney = matter.ResponsibleAttorney
+        var workerID = 1077
+        
+        switch( attorney )
+        {
+        case "Rachel Elkin":
+            workerID = 1095
+        case "Erika Alonso":
+            workerID = 1079
+        case "Andrew Skinner":
+            workerID = 1122
+        default:
+            workerID = 1077
+        }
+        
+        let output : String = String(  clientID ) + "," + String(workerID) + "," + "TRUE" + "," + "TRUE" + "\n"
+        
+        fileStreamer.write( output )
+    }
+}
+
+func writePenelopeClioServiceMembersFile( fromClioMatters: [ClioMatter], fromClioContacts: [ClioContact])
+{
+    var fileStreamer = FileStreamer( newFile : "Service File Members.csv");
+    
+    fileStreamer.write("uniqueServiceFileId, uniqueIndId, diagnosis1, diagnosis2, diagnosis3, memberUserDefinedCheckbox1, memberUserDefinedCheckbox2, memberUserDefinedDropdown1, memberUserDefinedDropdown2, presentingServiceFilesMember\n")
+    
+    for matter in fromClioContacts
+    {
+        let output : String = String( matter.ClientID ) + "," + String( matter.ClientID ) + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "TRUE" + "\n"
+        
+        fileStreamer.write( output )
+    }
+}
+
+func writePenelopeClioCaseMembersFile( fromClioMatters: [ClioMatter], fromClioContacts: [ClioContact])
+{
+    var fileStreamer = FileStreamer( newFile : "CasesMembers.csv");
+    
+    fileStreamer.write("uniqueCaseId, uniqueIndId, relationship, primaryCaseMember")
+    
+    for matter in fromClioContacts
+    {
+        let output : String = String( matter.ClientID ) + "," + String( matter.ClientID ) + "," + "Self" + "," + "TRUE" + "\n"
+        
+        fileStreamer.write( output )
+    }
+}
+
+func writePenelopeClioCaseFile( fromClioMatters: [ClioMatter], fromClioContacts: [ClioContact])
+{
+    var fileStreamer = FileStreamer( newFile : "Cases.csv");
+    
+    fileStreamer.write("uniqueCaseId, caseNickname, caseOpenDate, caseCloseDate, caseHouseIncome, caseFamilySize, fileNo, presentingIssue1, presentingIssue2, presentingIssue3, presentingIssue4, presentingIssue5, intakeUserDefinedCheckbox1, intakeUserDefinedCheckbox2, intakeUserDefinedDate1, intakeUserDefinedDate2, intakeSummary, userDefinedCheckbox1,userDefinedCheckbox2, userDefinedCheckbox3, userDefinedCheckbox4, userDefinedCheckbox5,userDefinedCheckbox6, userDefinedDate1, userDefinedDate2, userDefinedDate3, userDefinedDropdown1, userDefinedDropdown2, userDefinedDropdown3, userDefinedDropdown4, userDefinedDropdown5, userDefinedDropdown6, userDefinedMemo1, userDefinedMemo2, usedDefinedText1, userDefinedText2, userDefinedText3\n")
+    
+    let df = DateFormatter()
+    df.dateFormat = "yyyy-MM-dd"
+    
+    for matter in fromClioContacts
+    {
+        let output : String = String( matter.ClientID ) + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + "" + "\n"
+        
+        fileStreamer.write( output )
+    }
+    
+}
+
 func writePenelopeServiceFile( fromClioMatters: [ClioMatter] )
 {
     var fileStreamer = FileStreamer( newFile : "Service Files.csv");
@@ -367,7 +453,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         //        }
         //        else if ( person.q1857a2492 || person.q1857a2690 )
         //        {
-        //            userDefinedDropdown5 = "7+"
+        //            userDefinedDropdown5 = "7+ "
         //        }
         //        else if ( person.q1856 )
         //        {

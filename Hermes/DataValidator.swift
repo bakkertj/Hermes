@@ -558,7 +558,7 @@ func MapClioDescription( clio: String ) -> String
     case "Sexual harassment suit": return "General" // NEED
     case "Small Claims Court Post-Decree Division": return "General" // NEED
     case "Transfer of SAPCR": return "Full Rep - SAPCR"
-    case "Modification and Enforcement": return "Full Rep - Modification"
+    case "Modification and Enforcement ": return "Full Rep - Modification"
     default: return "ERROR  -\(clio)-"
     }
 }

@@ -42,67 +42,78 @@ var titaniumDirectory   = URLComponents()
 var clioDirectory       = URLComponents()
 var outputDirectory     = URLComponents()
 
+var contactAlreadyWritten : [ Int ] = [ Int ]()
+
 
 clioDirectory.path     = clioOption
 outputDirectory.path   = outputOption
 
 
-//if ( generateFilesOption == true )
-//{
-//    getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-//
-//    for file in titaniumFiles
-//    {
-//        generateTitaniumDefines( fileName:file )
-//    }
-//
-//    getFilesFromDirectory(directory:clioDirectory,      fileList:&clioFiles )
-//
-//    for file in clioFiles
-//    {
-//        generateClioDefines( fileName:file )
-//    }
-//}
-//
-//titaniumDirectory.path = titaniumOption + "/ClientContact"
-//getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-//
-//for file in titaniumFiles
-//{
-//    readTitaniumContactCSV( fileName:file )
-//}
-//
-//titaniumFiles.removeAll()
-//
-//titaniumDirectory.path = titaniumOption + "/Demographic"
-//getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-//
-//for file in titaniumFiles
-//{
-//    readTitaniumDemographicCSV( fileName:file )
-//}
-//
-//titaniumFiles.removeAll()
-//
-//titaniumDirectory.path = titaniumOption + "/CIS"
-//getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-//
-//for file in titaniumFiles
-//{
-//    readTitaniumCISCSV( fileName:file )
-//}
-//
-//
-//titaniumFiles.removeAll()
-//
-//titaniumDirectory.path = titaniumOption + "/Hotline"
-//getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
-//
-//for file in titaniumFiles
-//{
-//    readTitaniumHotlineCSV( fileName:file )
-//}
+if ( generateFilesOption == true )
+{
+    getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
 
+    for file in titaniumFiles
+    {
+        generateTitaniumDefines( fileName:file )
+    }
+
+    getFilesFromDirectory(directory:clioDirectory,      fileList:&clioFiles )
+
+    for file in clioFiles
+    {
+        generateClioDefines( fileName:file )
+    }
+}
+
+titaniumDirectory.path = titaniumOption + "/ClientContact"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumContactCSV( fileName:file )
+}
+
+titaniumFiles.removeAll()
+
+titaniumDirectory.path = titaniumOption + "/Demographic"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumDemographicCSV( fileName:file )
+}
+
+titaniumFiles.removeAll()
+
+titaniumDirectory.path = titaniumOption + "/CIS"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumCISCSV( fileName:file )
+}
+
+
+titaniumFiles.removeAll()
+
+titaniumDirectory.path = titaniumOption + "/Hotline"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumHotlineCSV( fileName:file )
+}
+
+clioFiles.removeAll()
+
+clioDirectory.path = clioOption + "/contacts"
+getFilesFromDirectory(directory:clioDirectory,  fileList:&clioFiles )
+
+for file in clioFiles
+{
+    readClioContactsCSV( fileName:file )
+}
 
 clioFiles.removeAll()
 
@@ -111,13 +122,16 @@ getFilesFromDirectory(directory:clioDirectory,  fileList:&clioFiles )
 
 for file in clioFiles
 {
-    readClioMattersCSV( fileName:file )
+    readClioMattersCSV( fileName:file
+    ) 
 }
 
 
-
 //writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray )
-//writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray)
+
+//writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray, fromClio: ClioContactArray )
+
+writePenelopeServiceFile( fromClioMatters: ClioMatterArray )
 
 NSSound.beep()
 print("Done!")

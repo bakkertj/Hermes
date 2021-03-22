@@ -108,6 +108,7 @@ func readTitaniumHotlineCSV(fileName: URL )
             hotlineEntry.FName = columns[TITANIUM_h_fname]
             hotlineEntry.MName = columns[TITANIUM_h_mname]
             hotlineEntry.LName = columns[TITANIUM_h_lname]
+            hotlineEntry.Email = columns[TITANIUM_h_email]
             TitaniumHotlineArray.append( hotlineEntry )
         }
         headerRead = true;

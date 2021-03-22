@@ -73,6 +73,7 @@ let TITANIUM_h_clientid = 0
 let TITANIUM_h_fname    = 5
 let TITANIUM_h_mname    = 6
 let TITANIUM_h_lname    = 7
+let TITANIUM_h_email    = 8
 
 let TITANIUM_cis_clientid  = 0
 let TITANIUM_cis_fname     = 5
@@ -85,16 +86,18 @@ let CLIO_matter_description = 4
 let CLIO_matter_clientname = 6
 let CLIO_matter_opendate = 12
 let CLIO_matter_closedate = 13
-let CLIO_userdefinednotes = 0
+let CLIO_userdefinednotes = 27
 let CLIO_responsibleattorney = 23
 let CLIO_familycasenumber = 28
 let CLIO_opposingpartydob = 29
 let CLIO_opposingparty = 30
+let CLIO_opposingaddress = 35
 let CLIO_opposingpartyphonenumber = 33
 let CLIO_familycourtnumber = 31
 
 let CLIO_contact_name = 1
 let CIO_contact_phonenumber = 2
+let CLIO_contact_email = 3
 let CLIO_contact_address = 4
 let CLIO_contact_city = 5
 let CLIO_contact_state = 6

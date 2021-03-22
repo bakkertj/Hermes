@@ -7,7 +7,64 @@
 
 import Foundation
 
-func readClioMattersCSV(fileName: URL)
+func readClioContactsCSV(fileName: URL)
+{
+    var data : String = ""
+    
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd"
+    dateFormatterGet.locale = Locale(identifier: "en_US")
+  
+    do
+    {
+        data = try String(contentsOf: fileName, encoding: .utf8)
+    }
+    catch
+    {
+        print("Error opening file \(fileName.path)")
+    }
+    
+    let rows = data.components(separatedBy: "\n")
+    var headerRead : Bool = false
+    
+    var rowCount : Int = 0
+    
+    for row in rows
+    {
+        if( headerRead == true )
+        {
+            let columns = row.components(separatedBy: ",")
+
+            var clioContact : ClioContact = ClioContact()
+            
+            clioContact.ClientID = Int ( columns[CLIO_contact_clientid] )!
+            clioContact.Name = columns[CLIO_contact_name]
+            
+            if( columns[ CIO_contact_phonenumber] != "")
+            {
+                clioContact.PhoneNumber = Int( columns[CIO_contact_phonenumber] )!
+            }
+            clioContact.StreetAddress = columns[CLIO_contact_address]
+            clioContact.City = columns[CLIO_contact_city]
+            clioContact.State = columns[ CLIO_contact_state]
+            clioContact.Country = columns[ CLIO_contact_country]
+            clioContact.Notes = columns[CLIO_contact_notes]
+            clioContact.Immigration = columns[CLIO_contact_immigration]
+            clioContact.Language = columns[CLIO_contact_language]
+            clioContact.Race = columns[CLIO_contact_race]
+            clioContact.Email = columns[CLIO_contact_email]
+
+            ClioContactArray.append(clioContact)
+        }
+        
+        headerRead = true;
+        rowCount += 1
+    }
+    
+}
+
+
+func readClioMattersCSV(fileName: URL )
 {
     var data : String = ""
     
@@ -38,7 +95,15 @@ func readClioMattersCSV(fileName: URL)
             var clioEntry : ClioMatter = ClioMatter()
             
             clioEntry.ClientName = columns[CLIO_matter_clientname]
-            print("\(clioEntry.ClientName)")
+            
+            clioEntry.Description = MapClioDescription(clio: columns[CLIO_matter_description])
+            
+            if( columns[CLIO_matter_opendate] != "" && columns[CLIO_matter_opendate] != " ")
+            {
+                clioEntry.OpenDate = dateFormatterGet.date(from: columns[CLIO_matter_opendate] )!
+            }
+            
+            
             if( columns[CLIO_matter_closedate] != "" && columns[CLIO_matter_closedate] != " ")
             {
                 clioEntry.CloseDate = dateFormatterGet.date(from: columns[CLIO_matter_closedate] )!
@@ -49,6 +114,7 @@ func readClioMattersCSV(fileName: URL)
                 clioEntry.OpposingPartyDOB  = dateFormatterGet.date(from: columns[CLIO_opposingpartydob] )!
             }
             
+            clioEntry.OpposingPartyAddress = columns[CLIO_opposingaddress]
             clioEntry.OpposingParty = columns[ CLIO_opposingparty ]
             
             if( columns[CLIO_opposingpartyphonenumber] != "" && columns[CLIO_opposingpartyphonenumber] != " ")

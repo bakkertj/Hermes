@@ -23,6 +23,7 @@ struct ClioContact
     var Immigration : String
     var Language : String
     var Race : String
+    var Email : String
     
     init ()
     {
@@ -37,6 +38,7 @@ struct ClioContact
         Immigration = "CLIO CONTACT ERROR"
         Language = "CLIO CONTACT ERROR"
         Race = "CLIO CONTACT ERROR"
+        Email = ""
     }
     
 }

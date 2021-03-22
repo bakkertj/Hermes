@@ -15,6 +15,7 @@ struct TitaniumHotline
     var FName : String
     var MName : String
     var LName : String
+    var Email : String
     
     init()
     {
@@ -22,6 +23,7 @@ struct TitaniumHotline
         FName = "HOTLINE ERROR"
         MName = "HOTLINE ERROR"
         LName = "HOTLINE ERROR"
+        Email = ""
     }
 }
 

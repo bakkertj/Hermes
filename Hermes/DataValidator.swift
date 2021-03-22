@@ -384,3 +384,181 @@ func MapQ1855( titanium: String ) -> String
     default: return "ERROR: \(titanium)"
     }
 }
+
+func MapClioDescription( clio: String ) -> String
+{
+    switch( clio )
+    {
+    case "Adjudication of Paternity  SAPCR  Divorce": return "Full Rep - Divorce with children"
+    case "Advice on Decree": return "Full Rep - Modification"
+    case "Appeal" : return "General"
+    case "Appeal " : return "General"
+    case "Bill of Review/Modification": return "Full Rep - Modification"
+    case "Brief Services-Divorce w/o Children": return "Full Rep - Divorce without children"
+    case "Child Custody": return "Full Rep - SAPCR" // NEED
+    case "Child Custody Intake": return "Full Rep - SAPCR" // NEED
+    case "Child Support": return "Full Rep - Modification" // NEED
+    case "Child support": return "Full Rep - Modification" // NEED
+    case "Child Support ": return "Full Rep - Modification" // NEED
+    case "Child support ": return "Full Rep - Modification" // NEED
+    case "Child Support Arrears": return "Full Rep - Modification" // NEED
+    case "Common law divorce w/ children":  return "Full Rep - Divorce with children"
+    case "CPS": return "Full Rep - SAPCR" // NEED
+    case "CPS ": return "Full Rep - SAPCR" // NEED
+    case "CPS Modification": return "Full Rep - SAPCR" // NEED
+    case "CPS Removal": return "Full Rep - SAPCR" // NEED
+    case "Custody": return "Full Rep - SAPCR" // NEED
+    case "Custody ": return "Full Rep - SAPCR" // NEED
+    case "Custody DF-14-10444 & Divorce DF-16-15327": return "Full Rep - Divorce with children" // NEED
+    case "Custody/Child Support": return "Full Rep - SAPCR" // NEED
+    case "Custody/Modification": return "Full Rep - Modification" // NEED
+    case "Deed": return "General" // NEED
+    case "Deed Change": return "General" // NEED
+    case "Description": return "General" // NEED
+    case "DIV W/ CH": return "Full Rep - Divorce with children"
+    case "Divorce":  return "Full Rep - Divorce without children"
+    case "Divorce ":  return "Full Rep - Divorce without children"
+    case "Divorce  no kids": return "Full Rep - Divorce without children"
+    case "Divorce (SAPCR done)": return "Full Rep - Divorce without children"
+    case "Divorce & Custody/Child Suuport": return "Full Rep - Divorce without children"
+    case "Divorce and child custody": return "Full Rep - Divorce with children"
+    case "Divorce and Criminal Matter": return "Full Rep - Divorce without children"
+    case "Divorce and Custody": return "Full Rep - Divorce with children"
+    case "Divorce and Custody/Child Support": return "Full Rep - Divorce with children"
+    case "Divorce and modification": return "Full Rep - Divorce without children"
+    case "Divorce and PO": return "Full Rep - Protective Order"
+    case "Divorce and PO ": return "Full Rep - Protective Order"
+    case "Divorce and Protective Order": return "Full Rep - Protective Order"
+    case "Divorce and SAPCR": return "Full Rep - Divorce with children"
+    case "Divorce Intake": return "Full Rep - Divorce without children"
+    case "Divorce Intake (2/11/21)": return "Full Rep - Divorce with children"
+    case "Divorce w/o Children ": return "Full Rep - Divorce without children"
+    case "Divorce no children": return "Full Rep - Divorce without children"
+    case "Divorce no children ": return "Full Rep - Divorce without children"
+    case "Divorce no children  PO": return "Full Rep - Protective Order"
+    case "Divorce no children and Enforcement": return "Full Rep - Divorce without children"
+    case "Divorce no kids": return "Full Rep - Divorce without children"
+    case "Divorce no kids + Protective Order": return "Full Rep - Divorce without children"
+    case "Divorce no kids/Protective Order": return "Full Rep - Divorce without children"
+    case "Divorce w. children": return "Full Rep - Divorce with children"
+    case "Divorce w/ adult children": return "Full Rep - Divorce with children"
+    case "Divorce w/ adult disabled chld": return "Full Rep - Divorce with children"
+    case "Divorce w/ child": return "Full Rep - Divorce with children"
+    case "Divorce w/ Child": return "Full Rep - Divorce with children"
+    case "Divorce w/ child + Protective Order": return "Full Rep - Divorce with children"
+    case "Divorce w/ children": return "Full Rep - Divorce with children"
+    case "Divorce w/ Children": return "Full Rep - Divorce with children"
+    case "Divorce w/ children and PO": return "Full Rep - Divorce with children"
+    case "Divorce w/ children writ of attachment": return "Full Rep - Divorce with children"
+    case "Divorce w/ kids": return "Full Rep - Divorce with children"
+    case "Divorce w/ no children": return "Full Rep - Divorce without children"
+    case "Divorce w/child": return "Full Rep - Divorce with children"
+    case "Divorce w/child ": return "Full Rep - Divorce with children"
+    case "Divorce w/children": return "Full Rep - Divorce with children"
+    case "Divorce w/o child": return "Full Rep - Divorce without children"
+    case "Divorce w/o child ": return "Full Rep - Divorce without children"
+    case "Divorce w/o children": return "Full Rep - Divorce without children"
+    case "Divorce w/o Children": return "Full Rep - Divorce without children"
+    case "Divorce w/o children  paternity  SAPCR  CPS": return "Full Rep - Divorce without children"
+    case "Divorce with Chiildren": return "Full Rep - Divorce with children"
+    case "Divorce with child": return "Full Rep - Divorce with children"
+    case "Divorce with Childre": return "Full Rep - Divorce with children"
+    case "Divorce with Children": return "Full Rep - Divorce with children"
+    case "Divorce with Children ": return "Full Rep - Divorce with children"
+    case "Divorce with children ": return "Full Rep - Divorce with children"
+    case "Divorce with children and PO": return "Full Rep - Divorce with children"
+    case "Divorce with Kids": return "Full Rep - Divorce with children"
+    case "Divorce with one child.": return "Full Rep - Divorce with children"
+    case "Divorce without children": return "Full Rep - Divorce without children"
+    case "Divorce- no children": return "Full Rep - Divorce without children"
+    case "Divorce-common law": return "Full Rep - Divorce without children"
+    case "Divorce-custody/child support-PO": return "Full Rep - Divorce with children"
+    case "Divorce/ PO": return "Full Rep - Divorce without children"
+    case "Divorce/Custody": return "Full Rep - Divorce with children"
+    case "Divorce/Custody/ Protective Order": return "Full Rep - Divorce with children"
+    case "Divorce- no children ": return "Full Rep - Divorce without children"
+    case "Drafting Divorce Decree": return "Full Rep - Divorce without children"
+    case "Duplantis- Modification": return "Full Rep - Modification"
+    case "Enforcement": return "Full Rep - Modification"
+    case "Eviction/Divorce": return "Full Rep - Divorce without children"
+    case "Eviction/Divorce ": return "Full Rep - Divorce without children"
+    case "Family Law": return "Full Rep - Divorce with children"
+    case "Full Rep.- Divorce ": return "Full Rep - Divorce without children"
+    case "Full Rep - Divorce w/ Children":return "Full Rep - Divorce with children"
+    case "Full Rep - Divorce w/ children": return "Full Rep - Divorce with children"
+    case "Full Rep - Divorce w/o children": return "Full Rep - Divorce without children"
+    case "Full Rep - Modification": return "Full Rep - Modification"
+    case "Full Rep - Modification (Aguila)": return "Full Rep - Modification"
+    case "Full Rep - Modification (Marsh)": return "Full Rep - Modification"
+    case "Full Rep - SACPR": return "Full Rep - SAPCR"
+    case "Full Rep - SAPCR": return "Full Rep - SAPCR"
+    case "Full Rep - SAPCR (Vega)": return "Full Rep - SAPCR"
+    case "Full Rep -Divorce w/ children": return "Full Rep - Divorce with children"
+    case "Full Rep -Divorce w/o children": return "Full Rep - Divorce with children"
+    case "Full Rep -SAPCR": return "Full Rep - SAPCR"
+    case "Full Rep- Divorce w/ Children": return "Full Rep - Divorce with children"
+    case "Full Rep- Divorce w/ Chldren": return "Full Rep - Divorce with children"
+    case "Full Rep- Modification": return "Full Rep - Modification"
+    case "Full Rep-Divorce w/ Child": return "Full Rep - Divorce with children"
+    case "Full Rep-Divorce w/o Children": return "Full Rep - Divorce without children"
+    case "Full Rep-Modification": return "Full Rep - Modification"
+    case "Full Rep-SAPCR": return "Full Rep - SAPCR"
+    case "Full Rep.- Divorce": return "Full Rep - Divorce without children"
+    case "General": return "General"
+    case "Guidry- Modification": return "Full Rep - Modification"
+    case "Intake for New Divorce Case": return "Full Rep - Divorce without children"
+    case "Intake for SAPCR Mod. Not going to take": return "SAPCR"
+    case "Modification": return "Full Rep - Modification"
+    case "Modification ": return "Full Rep - Modification"
+    case "Modification -  custody": return "Full Rep - Modification"
+    case "Modification (Carlos Andrade)": return "Full Rep - Modification"
+    case "Modification (Re-opened)": return "Full Rep - Modification"
+    case "Modification / CPS Removal": return "Full Rep - Modification"
+    case "Modification and Enforcement": return "Full Rep - Modification"
+    case "Modification and Writ (Sims)": return "Full Rep - Modification"
+    case "Modification by OAG": return "Full Rep - Modification"
+    case "Modification in Denton County": return "Full Rep - Modification"
+    case "Modification of Divorce": return "Full Rep - Modification"
+    case "Modification of SAPCR": return "Full Rep - Modification"
+    case "Modification- SAPCR": return "Full Rep - Modification"
+    case "Modification/ enforcement": return "Full Rep - Modification"
+    case "Modification/ Enforcement": return "Full Rep - Modification"
+    case "Modification/Appeal": return "Full Rep - Modification"
+    case "Original SAPCR": return "Full Rep - SAPCR"
+    case "Passport Consent": return "Brief Services - SAPCR" // NEED
+    case "PATERNITY": return "Brief Services - SAPCR" // NEED
+    case "PATERNITY ": return "Brief Services - SAPCR" // NEED
+    case "PO": return "Full Rep - Protective Order" // Ok??
+    case "PO ":return "Full Rep - Protective Order"
+    case "Power of Attorney  Referrals": return "General" // NEED
+    case "Property Matter": return "General" // NEED
+    case "Protective Order": return "Full Rep - Protective Order" // NEED
+    case "Protective Order & Custody": return "Full Rep - SAPCR" // NEED
+    case "Protective Order and Consulting Expert": return "Full Rep - Protective Order" // NEED
+    case "Protective Order and Divorce w/ children": return "Full Rep - Divorce with children" // NEED
+    case "Protective Order and SAPCR": return "Full Rep - SAPCR" // NEED
+    case "Recently finalized divorce. Needs clarification on order and standards for modification. Advise only.": return "Full Rep - Modification" // NEED
+    case "Research on Adult Children": return "General" // NEED
+    case "Return Client: Divorce w/o Children": return "Full Rep - Divorce without children"
+    case "SACPR": return "Full Rep - SAPCR"
+    case "SAPCR": return "Full Rep - SAPCR"
+    case "SAPCR ": return "Full Rep - SAPCR"
+    case "SAPCR  PO  Divorce": return "Full Rep - SAPCR"
+    case "SAPCR (adoption) and Divorce": return "Full Rep - SAPCR"
+    case "SAPCR (AG)": return "Full Rep - SAPCR"
+    case "SAPCR & PO": return "Full Rep - SAPCR"
+    case "SAPCR & Protective Order": return "Full Rep - SAPCR"
+    case "SAPCR and Protective Order": return "Full Rep - SAPCR"
+    case "SAPCR Intake": return "Full Rep - SAPCR"
+    case "SAPCR Mod/Divorce": return "Full Rep - Modification"
+    case "SAPCR Modification": return "Full Rep - Modification"
+    case "SAPCR- MOD": return "Full Rep - Modification"
+    case "SAPCR-OAG": return "Full Rep - SAPCR"
+    case "SAPCR/Adoption": return "Full Rep - SAPCR"
+    case "Sexual harassment suit": return "General" // NEED
+    case "Small Claims Court Post-Decree Division": return "General" // NEED
+    case "Transfer of SAPCR": return "Full Rep - SAPCR"
+    case "Modification and Enforcement": return "Full Rep - Modification"
+    default: return "ERROR  -\(clio)-"
+    }
+}

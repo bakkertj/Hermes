@@ -122,12 +122,11 @@ getFilesFromDirectory(directory:clioDirectory,  fileList:&clioFiles )
 
 for file in clioFiles
 {
-    readClioMattersCSV( fileName:file
-    ) 
+    readClioMattersCSV( fileName:file ) 
 }
 
 
-writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray )
+writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray, fromClio: ClioContactArray  )
 
 writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray, fromClio: ClioContactArray )
 
@@ -136,6 +135,7 @@ writePenelopeClioCaseFile( fromClioMatters: ClioMatterArray, fromClioContacts: C
 writePenelopeClioCaseMembersFile( fromClioMatters: ClioMatterArray, fromClioContacts: ClioContactArray )
 writePenelopeClioServiceMembersFile( fromClioMatters: ClioMatterArray, fromClioContacts: ClioContactArray )
 writePenelopeClioServiceWorkerFile( fromClioMatters: ClioMatterArray, fromClioContacts: ClioContactArray )
+writePenelopeClioServiceAttachmentsFile( fromClioMatters: ClioMatterArray, fromClioContacts: ClioContactArray )
 
 NSSound.beep()
 print("Done!")

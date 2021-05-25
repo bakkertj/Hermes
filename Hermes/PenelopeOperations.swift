@@ -13,36 +13,47 @@ func writePenelopeClioServiceWorkerFile( fromClioMatters: [ClioMatter], fromClio
     
     fileStreamer.write("uniqueServiceFileId, uniqueWorkerId, attendingWorker, primaryWorker \n")
     
+    var serviceIFileID : Int = 1
+    
     for matter in fromClioMatters
     {
-        var clientID : Int = -1
         
-        for client in ClioContactArray
-        {
-            if( client.Name == matter.ClientName )
-            {
-                clientID = client.ClientID
-                break
-            }
-        }
         
         let attorney = matter.ResponsibleAttorney
-        var workerID = 1077
+        var workerID = "EBakker"
         
         switch( attorney )
         {
-        case "Rachel Elkin":
-            workerID = 1095
-        case "Erika Alonso":
-            workerID = 1079
-        case "Andrew Skinner":
-            workerID = 1122
+        case "Rachel Elkin": // 1095
+            workerID = "RElkin"
+        case "Erika Alonso":  //1077
+            workerID = "EAlonso" //1079
+        case "Andrew Skinner": //1122
+            workerID = "ASkinner"
         default:
-            workerID = 1077
+            workerID = "EBakker"
         }
         
-        let output : String = String(  clientID ) + "," + String(workerID) + "," + "TRUE" + "," + "TRUE" + "\n"
+        let output : String = String(  serviceIFileID ) + "," + String(workerID) + "," + "TRUE" + "," + "TRUE" + "\n"
         
+        serviceIFileID = serviceIFileID + 1
+        
+        fileStreamer.write( output )
+    }
+}
+
+func writePenelopeClioServiceAttachmentsFile( fromClioMatters: [ClioMatter], fromClioContacts: [ClioContact])
+{
+    var fileStreamer = FileStreamer( newFile : "Service File Attachments.csv");
+    
+    fileStreamer.write("uniqueServiceFileId, attachmentName \n")
+    
+    var serviceFileID : Int = 1
+    for matter in fromClioContacts
+    {
+        let ID : String = String( matter.ClientID )
+        let output : String = String( serviceFileID ) + "," + ID + ".zip\n"
+        serviceFileID = serviceFileID + 1
         fileStreamer.write( output )
     }
 }
@@ -53,25 +64,29 @@ func writePenelopeClioServiceMembersFile( fromClioMatters: [ClioMatter], fromCli
     
     fileStreamer.write("uniqueServiceFileId, uniqueIndId, diagnosis1, diagnosis2, diagnosis3, memberUserDefinedCheckbox1, memberUserDefinedCheckbox2, memberUserDefinedDropdown1, memberUserDefinedDropdown2, presentingServiceFilesMember\n")
     
-    for matter in fromClioContacts
+    var serviceFileID : Int = 1
+    for matter in fromClioMatters
     {
-        let output : String = String( matter.ClientID ) + "," + String( matter.ClientID ) + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "TRUE" + "\n"
-        
+        let output : String = String( serviceFileID ) + "," + String( matter.ClientID ) + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "TRUE" + "\n"
+        serviceFileID = serviceFileID + 1
         fileStreamer.write( output )
     }
 }
 
 func writePenelopeClioCaseMembersFile( fromClioMatters: [ClioMatter], fromClioContacts: [ClioContact])
 {
-    var fileStreamer = FileStreamer( newFile : "CasesMembers.csv");
+    var fileStreamer = FileStreamer( newFile : "Case Members.csv");
     
     fileStreamer.write("uniqueCaseId, uniqueIndId, relationship, primaryCaseMember")
     
-    for matter in fromClioContacts
+    for matter in fromClioMatters
     {
         let output : String = String( matter.ClientID ) + "," + String( matter.ClientID ) + "," + "Self" + "," + "TRUE" + "\n"
         
-        fileStreamer.write( output )
+        if( matter.ClientID != -1 )
+        {
+            fileStreamer.write( output )
+        }
     }
 }
 
@@ -86,7 +101,27 @@ func writePenelopeClioCaseFile( fromClioMatters: [ClioMatter], fromClioContacts:
     
     for matter in fromClioContacts
     {
-        let output : String = String( matter.ClientID ) + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + "" + "\n"
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        
+        var openDate : String = ""
+
+        for clioMatter in fromClioMatters
+        {
+            print( "Searching \(clioMatter.ClientID) and \(matter.ClientID)")
+            if( clioMatter.ClientID == matter.ClientID )
+            {
+               openDate = df.string(from: clioMatter.OpenDate)
+               if( openDate == "" || openDate == " " )
+               {
+                  openDate = "1900-01-01"
+               }
+               break;
+            }
+        }
+
+        
+        let output : String = String( matter.ClientID ) + "," + " " + "," + openDate + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + "" + "\n"
         
         fileStreamer.write( output )
     }
@@ -99,8 +134,8 @@ func writePenelopeServiceFile( fromClioMatters: [ClioMatter] )
     
     fileStreamer.write("uniqueServiceFileId, uniqueCaseId, serviceName, isGroup, serviceFileStart, serviceFileEnd, estimatedSessionCount, userDefinedCheckbox1, userDefinedCheckbox2, userDefinedDate1, userDefinedDate2, userDefinedDropdown1, userDefinedDropdown2, userDefinedMemo1, userDefinedMemo2, userDefinedText1, userDefinedText2, cosenotes, closereason\n" )
     
-    var serviceFileID: Int = 0
-    var caseID: Int = 0
+    var serviceFileID: Int = 1
+    var caseID: Int = 1
     
     let df = DateFormatter()
     df.dateFormat = "yyyy-MM-dd"
@@ -111,13 +146,19 @@ func writePenelopeServiceFile( fromClioMatters: [ClioMatter] )
         df.dateFormat = "yyyy-MM-dd"
         
         let openDate : String = df.string(from: matter.OpenDate)
-        let closeDate : String = df.string(from: matter.CloseDate)
+        
+        // \TODO Fix it so an empty date does not return a close date
+        var closeDate : String = df.string(from: matter.CloseDate)
+        
+        if( matter.CloseDateFound == false )
+        {
+            closeDate = ""
+        }
         
         for client in ClioContactArray
         {
             if( client.Name == matter.ClientName )
             {
-                serviceFileID = client.ClientID
                 caseID = client.ClientID
                 break
             }
@@ -144,9 +185,11 @@ func writePenelopeServiceFile( fromClioMatters: [ClioMatter] )
         
         
         
-        let output : String = String( serviceFileID ) + "," + String( caseID ) + "," + matter.Description + "," + " " + "," + String(openDate) + "," + String(closeDate) + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "\"" + userDefinedMemo1 + "\"" + "," + "\"" + userDefinedMemo2 + "\"" + "," + "" + "," + "" + "," + "" + "," + "" + "\n"
+        let output : String = String( serviceFileID ) + "," + String( caseID ) + "," + matter.Description + "," + "FALSE" + "," + String(openDate) + "," + String(closeDate) + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "\"" + userDefinedMemo1 + "\"" + "," + "\"" + userDefinedMemo2 + "\"" + "," + "" + "," + "" + "," + "" + "," + "" + "\n"
         
         fileStreamer.write( output )
+        
+        serviceFileID = serviceFileID + 1
         
     }
 }
@@ -211,9 +254,14 @@ func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDem
                 oktocontact = "Safe"
             }
             
-            masterSet = true;
+            var master : String = "FALSE"
+            if( masterSet == false )
+            {
+                masterSet = true
+                master = "TRUE"
+            }
             
-            let output : String = clientID + "," + "Tel (Cell)" + "," + phone + "," + "," + "TRUE" + "," + oktocontact + "," + "TRUE" + "\n"
+            let output : String = clientID + "," + "Tel (Cell)" + "," + phone + "," + "," + "TRUE" + "," + oktocontact + "," + master + "\n"
             
             
             fileStreamer.write( output )
@@ -234,9 +282,14 @@ func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDem
                 oktocontact = "Safe"
             }
             
-            masterSet = true;
+            var master : String = "FALSE"
+            if( masterSet == false )
+            {
+                masterSet = true
+                master = "TRUE"
+            }
             
-            let output : String = clientID + "," + "Work Phone" + "," + phone + "," + "," + "TRUE" + "," + oktocontact + "," + "TRUE" + "\n"
+            let output : String = clientID + "," + "Work Phone" + "," + phone + "," + "," + "TRUE" + "," + oktocontact + "," + master + "\n"
             
             
             fileStreamer.write( output )
@@ -262,6 +315,21 @@ func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDem
             let output : String = clientID + "," + "Email" + "," + email + "," + "," + "TRUE" + "," + oktocontact + "," + master + "\n"
             
             fileStreamer.write( output )
+        }
+        else {
+            
+            if( person.Email != "" )
+            {
+                var master : String = "FALSE"
+                if( masterSet == false )
+                {
+                    masterSet = true
+                    master = "TRUE"
+                }
+                let output : String = clientID + "," + "Email" + "," + person.Email + "," + "," + "" + "," + "" + "," + master + "\n"
+                
+                fileStreamer.write( output )
+            }
         }
     }
     
@@ -341,7 +409,7 @@ func writePenelopeContactsFile( fromContacts : [TitaniumClientContact] , fromDem
 
 var excludeList : [String] = [String]()
 
-func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic], fromCIS: [TitaniumCIS], fromHotline : [TitaniumHotline] )
+func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , fromDemographics : [TitaniumDemographic], fromCIS: [TitaniumCIS], fromHotline : [TitaniumHotline], fromClio : [ClioContact])
 {
     var fileStreamer = FileStreamer( newFile : "Individuals.csv");
     
@@ -371,118 +439,133 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         
         excludeList.append( clientID )
         
-        //        var name : String = findClientContactEntry(who: person.ClientID).FirstName + " " + findClientContactEntry(who: person.ClientID).MiddleName
-        //
-        //        var lastName : String = findClientContactEntry(who: person.ClientID).LastName
-        //
-        //        if( name == " " )
-        //        {
-        //            name = person.FName + " " + person.MName
-        //            lastName = person.LName
-        //        }
-        //
-        //        let birthDate : String = df.string(from: findClientContactEntry(who: person.ClientID).BirthDate)
-        //
-        //        let siteName : String = MapQ1842( from: person.q1842 )
-        //        var referral : String = "ERROR"
-        //
-        //        referral = MapQ1848( language: person.q1848)
-        //
-        //        var indLanguage : String = "ERROR: \(person.q1848)"
-        //
-        //        indLanguage = MapQ1847( language: person.q1847)
-        //
-        //        var notes : String = findClientContactEntry(who: person.ClientID).Address1 + " " + findClientContactEntry(who: person.ClientID).Address2
-        //
-        //        notes = notes.replacingOccurrences( of: "\n", with: " ")
-        //        notes = notes.replacingOccurrences( of: "\r", with: " ")
-        //
-        //
-        //        let mainCounty : String = MapQ3680( titanium: person.q3680 )
-        //
-        //        // Bool?
-        //        var userDefinedCheckbox3 : String
-        //        userDefinedCheckbox3 = String( person.q3682).uppercased()
-        //
-        //        var userDefinedCheckbox4 : String
-        //        userDefinedCheckbox4 = String( person.q1856).uppercased()
-        //
-        //        var userDefinedDropdown1 : String
-        //
-        //        if( person.q1844 != "" )
-        //        {
-        //            userDefinedDropdown1 = MapQ1844( titanium: person.q1844 )
-        //        }
-        //        else
-        //        {
-        //            userDefinedDropdown1 = MapQ1844( titanium: person.q3679 )
-        //        }
-        //
-        //        let userDefinedDropdown3 : String = MapQ1849( titanium: person.q1849 )
-        //        let userDefinedDropdown4 : String = MapQ1853( titanium: person.q1853 )
-        //
-        //        var userDefinedDropdown5 : String = ""
-        //
-        //        if( person.q1857a2689)
-        //        {
-        //            userDefinedDropdown5 = "0"
-        //        }
-        //        else if ( person.q1857a2486 )
-        //        {
-        //            userDefinedDropdown5 = "1"
-        //        }
-        //        else if ( person.q1857a2487 )
-        //        {
-        //            userDefinedDropdown5 = "2"
-        //        }
-        //        else if ( person.q1857a2488 )
-        //        {
-        //            userDefinedDropdown5 = "3"
-        //        }
-        //        else if ( person.q1857a2489 )
-        //        {
-        //            userDefinedDropdown5 = "4"
-        //        }
-        //        else if ( person.q1857a2490 )
-        //        {
-        //            userDefinedDropdown5 = "5"
-        //        }
-        //        else if ( person.q1857a2491 )
-        //        {
-        //            userDefinedDropdown5 = "6"
-        //        }
-        //        else if ( person.q1857a2492 || person.q1857a2690 )
-        //        {
-        //            userDefinedDropdown5 = "7+ "
-        //        }
-        //        else if ( person.q1856 )
-        //        {
-        //            userDefinedDropdown5 = "N/A — no children"
-        //        }
-        //        else if ( person.q1857a3642 )
-        //        {
-        //            userDefinedDropdown5 = ""
-        //        }
-        //
-        //        let userDefinedDropdown6  : String = MapQ1858( titanium: person.q1858 )
-        //        let userDefinedDropdown7  : String = MapQ1850( titanium: person.q1850 )
-        //        let userDefinedDropdown8  : String = MapQ1851( titanium: person.q1851 )
-        //        let userDefinedDropdown9  : String = MapQ3350( titanium: person.q3350 )
-        //        let userDefinedDropdown10 : String = MapQ1852( titanium: person.q1852 )
-        //        let userDefinedDropdown11 : String = MapQ1854( titanium: person.q1854 )
-        //        let userDefinedDropdown12 : String = MapQ1855( titanium: person.q1855 )
-        //
-        //        let userDefinedText1 = name + " " + lastName
-        //
-        //        let userDefinedText2 : String = clientID
-        //
-        //        let userDefinedMemo1 : String = findClientContactEntry(who: person.ClientID).Comment.replacingOccurrences(of: ",", with: " ")
-        //
-        //        count = count + 1
-        //
-        //        let output : String = clientID + "," + name + "," + " " + "," + lastName + " , " + " " + "," + person.q1845 + "," + birthDate + "," + siteName + "," + referral + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + indLanguage + "," + " " + "," + " " + "," + " " + "," + notes + "," + " " + "," + " " + "," + " " + "," + " " + "," + mainCounty + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedDropdown1 + "," + " " + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + ",\"" + userDefinedDropdown6 + "\",\"" + userDefinedDropdown7 + "\",\"" + userDefinedDropdown8 + "\",\"" + userDefinedDropdown9 +  "\",\"" + userDefinedDropdown10 + "\",\"" + userDefinedDropdown11 + "\",\"" + userDefinedDropdown12 + "\"," + userDefinedMemo1 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedText1 + "," + userDefinedText2 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
-        //
-        //        fileStreamer.write( output )
+        var name : String = findClientContactEntry(who: person.ClientID).FirstName + " " + findClientContactEntry(who: person.ClientID).MiddleName
+        
+        var lastName : String = findClientContactEntry(who: person.ClientID).LastName
+        
+        if( name == " " )
+        {
+            name = person.FName + " " + person.MName
+            lastName = person.LName
+        }
+        
+        if( lastName == "" || lastName == " " )
+        {
+            lastName = "LNU"
+        }
+        
+        if( name == "" || name == " " )
+        {
+            name = "FNU"
+        }
+        
+        name = String( name.prefix(24) )
+        lastName = String( lastName.prefix(24) )
+        
+        let birthDate : String = df.string(from: findClientContactEntry(who: person.ClientID).BirthDate)
+        
+        let siteName : String = MapQ1842( from: person.q1842 )
+        var referral : String = "ERROR"
+        
+        referral = MapQ1848( language: person.q1848)
+        
+        var indLanguage : String = "ERROR: \(person.q1848)"
+        
+        indLanguage = MapQ1847( language: person.q1847)
+        
+        var notes : String = findClientContactEntry(who: person.ClientID).Address1 + " " + findClientContactEntry(who: person.ClientID).Address2
+        
+        notes = notes.replacingOccurrences( of: "\n", with: " ")
+        notes = notes.replacingOccurrences( of: "\r", with: " ")
+        
+        
+        let mainCounty : String = MapQ3680( titanium: person.q3680 )
+        
+        // Bool?
+        var userDefinedCheckbox3 : String
+        userDefinedCheckbox3 = String( person.q3682).uppercased()
+        
+        var userDefinedCheckbox4 : String
+        userDefinedCheckbox4 = String( person.q1856).uppercased()
+        
+        var userDefinedDropdown1 : String
+        
+        if( person.q1844 != "" )
+        {
+            userDefinedDropdown1 = MapQ1844( titanium: person.q1844 )
+        }
+        else
+        {
+            userDefinedDropdown1 = MapQ1844( titanium: person.q3679 )
+        }
+        
+        let userDefinedDropdown3 : String = MapQ1849( titanium: person.q1849 )
+        let userDefinedDropdown4 : String = MapQ1853( titanium: person.q1853 )
+        
+        var userDefinedDropdown5 : String = ""
+        
+        if( person.q1857a2689)
+        {
+            userDefinedDropdown5 = "0"
+        }
+        else if ( person.q1857a2486 )
+        {
+            userDefinedDropdown5 = "1"
+        }
+        else if ( person.q1857a2487 )
+        {
+            userDefinedDropdown5 = "2"
+        }
+        else if ( person.q1857a2488 )
+        {
+            userDefinedDropdown5 = "3"
+        }
+        else if ( person.q1857a2489 )
+        {
+            userDefinedDropdown5 = "4"
+        }
+        else if ( person.q1857a2490 )
+        {
+            userDefinedDropdown5 = "5"
+        }
+        else if ( person.q1857a2491 )
+        {
+            userDefinedDropdown5 = "6"
+        }
+        else if ( person.q1857a2492 || person.q1857a2690 )
+        {
+            userDefinedDropdown5 = "7+ "
+        }
+        else if ( person.q1856 )
+        {
+            userDefinedDropdown5 = "\"N/A - no children\""
+        }
+        else if ( person.q1857a3642 )
+        {
+            userDefinedDropdown5 = ""
+        }
+        
+        let userDefinedDropdown6  : String = MapQ1858( titanium: person.q1858 )
+        let userDefinedDropdown7  : String = MapQ1850( titanium: person.q1850 )
+        let userDefinedDropdown8  : String = MapQ1851( titanium: person.q1851 )
+        let userDefinedDropdown9  : String = MapQ3350( titanium: person.q3350 )
+        let userDefinedDropdown10 : String = MapQ1852( titanium: person.q1852 )
+        let userDefinedDropdown11 : String = MapQ1854( titanium: person.q1854 )
+        let userDefinedDropdown12 : String = MapQ1855( titanium: person.q1855 )
+        
+        let userDefinedText1 = name + " " + lastName
+        
+        let userDefinedText2 : String = clientID
+        
+        let userDefinedMemo1 : String = findClientContactEntry(who: person.ClientID).Comment.replacingOccurrences(of: ",", with: " ")
+        
+        let gender : String = MapGender( from: person.q1845 )
+        
+        count = count + 1
+        
+        let output : String = clientID + "," + name + "," + " " + "," + lastName + " , " + " " + "," + gender + "," + birthDate + "," + siteName + "," + referral + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + indLanguage + "," + " " + "," + " " + "," + " " + "," + notes + "," + " " + "," + " " + "," + " " + "," + " " + "," + mainCounty + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + userDefinedCheckbox3 + "," + userDefinedCheckbox4 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedDropdown1 + "," + " " + "," + userDefinedDropdown3 + "," + userDefinedDropdown4 + "," + userDefinedDropdown5 + ",\"" + userDefinedDropdown6 + "\",\"" + userDefinedDropdown7 + "\",\"" + userDefinedDropdown8 + "\",\"" + userDefinedDropdown9 +  "\",\"" + userDefinedDropdown10 + "\",\"" + userDefinedDropdown11 + "\",\"" + userDefinedDropdown12 + "\"," + userDefinedMemo1 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + userDefinedText1 + "," + userDefinedText2 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
+        
+        fileStreamer.write( output )
         demographicCount += 1
     }
     
@@ -500,8 +583,19 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
             count = count + 1
             //       print("Found a ClientContact \(clientEntry.ClientID)")
             excludeList.append(String(clientEntry.ClientID))
-            let name     = clientEntry.FirstName + " " + clientEntry.MiddleName
-            let lastName = clientEntry.LastName
+            var name     = clientEntry.FirstName + " " + clientEntry.MiddleName
+            var lastName = clientEntry.LastName
+            
+            if( lastName == "" || lastName == " " )
+            {
+                lastName = "LNU"
+            }
+            
+            if( name == "" || name == " " )
+            {
+                name = "FNU"
+            }
+            
             let output : String = String(clientEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Outreach" + "," + " " + "," + " " + "," + " "
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
@@ -527,9 +621,22 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
             count = count + 1
             //    print("Found a CIS \(cisEntry.ClientID)")
             excludeList.append(String(cisEntry.ClientID))
-            let name     = cisEntry.FName + " " + cisEntry.MName
-            let lastName = cisEntry.LName
-            let output : String = String(cisEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Outreach" + "," + " " + "," + " " + "," + " "
+            var name     = cisEntry.FName + " " + cisEntry.MName
+            var lastName = cisEntry.LName
+            
+            if( lastName == "" || lastName == " " )
+            {
+                lastName = "LNU"
+            }
+            
+            if( name == "" || name == " " )
+            {
+                name = "FNU"
+            }
+            
+            let gender : String = MapGender( from: cisEntry.Gender)
+            
+            let output : String = String(cisEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + gender + "," + " " + "," + "Outreach" + "," + " " + "," + " " + "," + " "
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
             fileStreamer.write( output )
@@ -553,9 +660,22 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         if( excludeList.contains( String(hotline.ClientID) ) == false )
         {
             count = count + 1
+            excludeList.append(String(hotline.ClientID))
             
-            let name     = hotline.FName + " " + hotline.MName
-            let lastName = hotline.LName
+            var name     = hotline.FName + " " + hotline.MName
+            var lastName = hotline.LName
+            
+            if( lastName == "" || lastName == " " )
+            {
+                lastName = "LNU"
+            }
+            
+            if( name == "" || name == " " )
+            {
+                name = "FNU"
+            }
+            
+            
             let output : String = String(hotline.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Shelter" + "," + " " + "," + " " + "," + " "
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
@@ -564,6 +684,48 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
         }
         
     }
+    
+    // \TODO Add address
+    
+    // Write the hotline only contacts
+    for person in fromClio
+    {
+        if( excludeList.contains( String(person.ClientID) ) == false )
+        {
+            count = count + 1
+            excludeList.append(String(person.ClientID))
+            
+            let input_name     = person.Name
+        
+            let name_array = input_name.split(separator: " ")
+            var name : String = ""
+
+            for i in 0..<(name_array.count-1)
+            {
+                name = name + name_array[i] + " "
+            }
+            
+            var lastName = name_array[name_array.count - 1]
+            
+            if( lastName == "" || lastName == " " )
+            {
+                lastName = "LNU"
+            }
+            
+            if( name == "" || name == " " )
+            {
+                name = "FNU"
+            }
+            
+            let language = MapQ1847( language: person.Language )
+            
+            let output : String = String(person.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Outreach" + "," + " " + "," + " " + "," + " "
+                + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + language + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
+            
+            fileStreamer.write( output )
+        }
+    }
+    
     print("Wrote \(count) Total Records")
     print("Demographic Count        : \(demographicCount)")
     print("Client Contact Count     : \(clientCount)")

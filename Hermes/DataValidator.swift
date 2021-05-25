@@ -176,12 +176,12 @@ func MapQ1847( language : String ) -> String
     switch language{
     case "English": return "English"
     case "Spanish": return "Spanish"
-    case "Both (English & Spanish)": return "English & Spanish (both)"
-    case "Both (English/Spanish)": return "English & Spanish (both)"
-    case "Other": return "Other"
+    case "Both (English & Spanish)": return "English"
+    case "Both (English/Spanish)": return "English"
+    case "Other": return "Other (indicate in notes)"
     case "No Response": return ""
     case "<No Response>": return ""
-    default: return "ERROR: \(language)"
+    default: return ""
     }
 }
 
@@ -196,7 +196,7 @@ func MapQ1848( language : String ) -> String
     case "No Response": return ""
     case "<No Response>": return ""
     case "":return ""
-    default: return "ERROR: \(language)"
+    default: return ""
     }
 }
 
@@ -234,10 +234,10 @@ func MapQ1853( titanium : String ) -> String
 func MapQ1854( titanium : String ) -> String
 {
     switch titanium{
-    case "Currently in a relationship with abuser": return "In a relationship with abuser"
-    case "On and off relationship with abuser": return "On/off relationship with abuser"
-    case "On and Off relationship with abuser": return "On/off relationship with abuser"
-    case "Terminated relationship with abuser": return "Ended relationship with abuser"
+    case "Currently in a relationship with abuser": return "In relationship w/ abuser"
+    case "On and off relationship with abuser": return "On/Off relationship w/ abuser"
+    case "On and Off relationship with abuser": return "On/Off relationship w/ abuser"
+    case "Terminated relationship with abuser": return "Ended relationship w/ abuser"
     case "No Response": return ""
     case "<No Response>": return ""
     default: return "ERROR: \(titanium)"
@@ -247,14 +247,14 @@ func MapQ1854( titanium : String ) -> String
 func MapQ1858( titanium : String ) -> String
 {
     switch titanium {
-    case "Would not qualify at this time" : return "No and would not qualify"
-    case "would not qualitfy at this time" : return "No and would not qualify"
-    case "Has applied" : return "No, but has applied"
-    case "Has a protective order" : return "Yes, currently has a protective order"
+    case "Would not qualify at this time" : return "No and would not qualify for a PO"
+    case "would not qualitfy at this time" : return "No and would not qualify for a PO"
+    case "Has applied" : return "No, but has applied for a PO"
+    case "Has a protective order" : return "Yes, currently has a PO"
     case "Does not have a protective order" : return "No"
-    case "would not qualify at this time" : return "No and would not qualify"
-    case "has applied" : return "No, but has applied"
-    case "has a protective order" : return "Yes, currently has a protective order"
+    case "would not qualify at this time" : return "No and would not qualify for a PO"
+    case "has applied" : return "No, but has applied for a PO"
+    case "has a protective order" : return "Yes, currently has a PO"
     case "does not have a protective order" : return "No"
     case "No Response": return ""
     case "<No Response>": return ""
@@ -328,7 +328,7 @@ func MapQ1851( titanium : String ) -> String
     case "$0.00 ": return "$0"
     case "$1-$30K": return "$1-$30k"
     case "$30K-$75K": return "$30k-$75k"
-    case "$75K-$150K": return "$75k-$150k"
+    case "$75K-$150K": return "$75k-$150"
     case "$150K+": return "$150k+"
     case "$1-$30k": return "$1-$30k"
     case "$30k-$75k": return "$30k-$75k"
@@ -507,7 +507,7 @@ func MapClioDescription( clio: String ) -> String
     case "General": return "General"
     case "Guidry- Modification": return "Full Rep - Modification"
     case "Intake for New Divorce Case": return "Full Rep - Divorce without children"
-    case "Intake for SAPCR Mod. Not going to take": return "SAPCR"
+    case "Intake for SAPCR Mod. Not going to take": return "Full Rep - Modification"
     case "Modification": return "Full Rep - Modification"
     case "Modification ": return "Full Rep - Modification"
     case "Modification -  custody": return "Full Rep - Modification"
@@ -560,5 +560,15 @@ func MapClioDescription( clio: String ) -> String
     case "Transfer of SAPCR": return "Full Rep - SAPCR"
     case "Modification and Enforcement ": return "Full Rep - Modification"
     default: return "ERROR  -\(clio)-"
+    }
+}
+
+func MapGender( from : String ) -> String
+{
+    switch( from )
+    {
+    case "Female": return "Female"
+    case "Male": return "Male"
+    default: return "Female"
     }
 }

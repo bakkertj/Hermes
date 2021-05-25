@@ -96,7 +96,7 @@ let CLIO_opposingpartyphonenumber = 33
 let CLIO_familycourtnumber = 31
 
 let CLIO_contact_name = 1
-let CIO_contact_phonenumber = 2
+let CLIO_contact_phonenumber = 2
 let CLIO_contact_email = 3
 let CLIO_contact_address = 4
 let CLIO_contact_city = 5

@@ -40,9 +40,9 @@ func readClioContactsCSV(fileName: URL)
             clioContact.ClientID = Int ( columns[CLIO_contact_clientid] )!
             clioContact.Name = columns[CLIO_contact_name]
             
-            if( columns[ CIO_contact_phonenumber] != "")
+            if( columns[ CLIO_contact_phonenumber] != "")
             {
-                clioContact.PhoneNumber = Int( columns[CIO_contact_phonenumber] )!
+                clioContact.PhoneNumber = Int( columns[CLIO_contact_phonenumber] )!
             }
             clioContact.StreetAddress = columns[CLIO_contact_address]
             clioContact.City = columns[CLIO_contact_city]
@@ -63,6 +63,17 @@ func readClioContactsCSV(fileName: URL)
     
 }
 
+
+func lookupClientIDFromClio( fromClioContact: [ClioContact], name: String ) -> Int
+{
+    for clientContact in fromClioContact{
+        if( clientContact.Name == name )
+        {
+            return ( clientContact.ClientID )
+        }
+    }
+    return -1
+}
 
 func readClioMattersCSV(fileName: URL )
 {
@@ -96,6 +107,8 @@ func readClioMattersCSV(fileName: URL )
             
             clioEntry.ClientName = columns[CLIO_matter_clientname]
             
+            clioEntry.ClientID = lookupClientIDFromClio( fromClioContact: ClioContactArray, name: clioEntry.ClientName )
+            assert( clioEntry.ClientID != -1 );
             clioEntry.Description = MapClioDescription(clio: columns[CLIO_matter_description])
             
             if( columns[CLIO_matter_opendate] != "" && columns[CLIO_matter_opendate] != " ")
@@ -106,6 +119,7 @@ func readClioMattersCSV(fileName: URL )
             
             if( columns[CLIO_matter_closedate] != "" && columns[CLIO_matter_closedate] != " ")
             {
+                clioEntry.CloseDateFound = true
                 clioEntry.CloseDate = dateFormatterGet.date(from: columns[CLIO_matter_closedate] )!
             }
             

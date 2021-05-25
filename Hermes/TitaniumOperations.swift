@@ -68,6 +68,7 @@ func readTitaniumCISCSV(fileName: URL )
             cisEntry.MName = columns[TITANIUM_cis_mname]
             cisEntry.LName = columns[TITANIUM_cis_lname]
             cisEntry.Ethnicity = MapQ1844( titanium: columns[TITANIUM_cis_ethnicity])
+            cisEntry.Gender = columns[TITANIUM_cis_gender]
 
             TitaniumCISArray.append( cisEntry )
         }
@@ -105,6 +106,7 @@ func readTitaniumHotlineCSV(fileName: URL )
             let columns = row.components(separatedBy: ",")
             var hotlineEntry = TitaniumHotline()
             hotlineEntry.ClientID = Int(columns[TITANIUM_h_clientid])!
+            
             hotlineEntry.FName = columns[TITANIUM_h_fname]
             hotlineEntry.MName = columns[TITANIUM_h_mname]
             hotlineEntry.LName = columns[TITANIUM_h_lname]
@@ -149,6 +151,7 @@ func readTitaniumDemographicCSV(fileName: URL)
             var demographicEntry = TitaniumDemographic()
             demographicEntry.ClientID = Int(columns[TITANIUM_clientid])!
             
+           
             demographicEntry.FName = columns[TITANIUM_fname]
             demographicEntry.MName = columns[TITANIUM_mname]
             demographicEntry.LName = columns[TITANIUM_lname]
@@ -217,6 +220,8 @@ func readTitaniumContactCSV(fileName: URL)
             let columns = row.components(separatedBy: ",")
             var contactEntry = TitaniumClientContact()
             contactEntry.ClientID   = Int(columns[TITANIUM_c_clientid])!
+            
+            
 
             contactEntry.FirstName  = columns[TITANIUM_c_firstname]
             contactEntry.MiddleName = columns[TITANIUM_c_middlename]

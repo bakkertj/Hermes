@@ -18,6 +18,7 @@ struct ClioMatter
     var ClientName  : String
     var OpenDate    : Date
     var CloseDate   : Date
+    var CloseDateFound : Bool
     var UserDefinedNotes : String
     var OpposingPartyDOB : Date
     var OpposingParty : String
@@ -33,6 +34,7 @@ struct ClioMatter
         ClientName = "CLIO ERROR"
         OpenDate = Date()
         CloseDate = Date()
+        CloseDateFound = false
         UserDefinedNotes = ""
         ResponsibleAttorney = "Erin Bakker"
         OpposingPartyDOB = Date()

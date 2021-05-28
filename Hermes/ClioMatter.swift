@@ -24,6 +24,7 @@ struct ClioMatter
     var OpposingParty : String
     var OpposingPartyAddress : String
     var OpposingPartyPhoneNumber: Int
+    var OpposingCounsel : String
     var ResponsibleAttorney : String
     var FamilyCourtNumber : String
     var FamilyCaseNumber : String
@@ -40,6 +41,7 @@ struct ClioMatter
         OpposingPartyDOB = Date()
         OpposingParty = "ERROR"
         OpposingPartyAddress = "ERROR"
+        OpposingCounsel = ""
         OpposingPartyPhoneNumber = -1
         FamilyCourtNumber = "ERROR"
         FamilyCaseNumber = "ERROR"

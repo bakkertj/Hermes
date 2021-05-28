@@ -66,6 +66,18 @@ if ( generateFilesOption == true )
     }
 }
 
+
+titaniumDirectory.path = titaniumOption + "/Birthday"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    readTitaniumBirthdateCSV( fileName:file )
+}
+
+titaniumFiles.removeAll()
+
+
 titaniumDirectory.path = titaniumOption + "/ClientContact"
 getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
 

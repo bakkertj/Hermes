@@ -131,6 +131,8 @@ func readClioMattersCSV(fileName: URL )
             clioEntry.OpposingPartyAddress = columns[CLIO_opposingaddress]
             clioEntry.OpposingParty = columns[ CLIO_opposingparty ]
             
+            clioEntry.OpposingCounsel = columns[CLIO_opposingcounsel]
+            
             if( columns[CLIO_opposingpartyphonenumber] != "" && columns[CLIO_opposingpartyphonenumber] != " ")
             {
                 clioEntry.OpposingPartyPhoneNumber = Int( columns[ CLIO_opposingpartyphonenumber] )!

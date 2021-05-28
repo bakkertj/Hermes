@@ -35,6 +35,63 @@ func findDemographicEntry( who : Int ) -> TitaniumDemographic
     return bad
 }
 
+func readTitaniumBirthdateCSV(fileName: URL )
+{
+    var data : String = ""
+    
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd"
+    dateFormatterGet.locale = Locale(identifier: "en_US")
+  
+    do
+    {
+        data = try String(contentsOf: fileName, encoding: .utf8)
+    }
+    catch
+    {
+        print("Error opening file \(fileName.path)")
+    }
+    
+    let rows = data.components(separatedBy: "\n")
+    var headerRead : Bool = false
+    
+    var rowCount : Int = 0
+
+    for row in rows
+    {
+        if( headerRead == true )
+        {
+            let columns = row.components(separatedBy: ",")
+            var birthdateEntry = TitaniumBirthdate()
+            birthdateEntry.ClientID = Int(columns[TITANIUM_birthdate_clientid])!
+            if( columns[TITANIUM_birthdate_date].count > 2 )
+            {
+                birthdateEntry.Birthdate = dateFormatterGet.date(from: columns[TITANIUM_birthdate_date])!
+                TitaniumBirthdateArray.append( birthdateEntry )
+            }
+
+        }
+        headerRead = true;
+        rowCount  += 1;
+        
+    }
+}
+
+func findClientBirthDay( who: Int ) -> ( Bool, Date )
+{
+    let date : Date = Date();
+    for client in TitaniumBirthdateArray
+    {
+        if( client.ClientID == who )
+        {
+            return ( true, client.Birthdate )
+        }
+        
+    }
+    return ( false, date )
+}
+
+
 func readTitaniumCISCSV(fileName: URL )
 {
     var data : String = ""
@@ -244,6 +301,7 @@ func readTitaniumContactCSV(fileName: URL)
             if( columns[TITANIUM_c_birthdate] != "" && columns[TITANIUM_c_birthdate] != " ")
             {
                 contactEntry.BirthDate = dateFormatterGet.date(from: columns[TITANIUM_c_birthdate] )!
+                contactEntry.BirthDateFound = true
             }
             
             contactEntry.Comment    = columns[TITANIUM_c_comment]

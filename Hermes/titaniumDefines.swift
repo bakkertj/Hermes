@@ -25,7 +25,8 @@ let TITANIUM_c_birthdate = 23
 let TITANIUM_c_comment = 24
 let TITANIUM_c_fromweb = 25
 
-
+let TITANIUM_birthdate_clientid = 1
+let TITANIUM_birthdate_date = 2
 
 let TITANIUM_clientid = 0
 let TITANIUM_casenoteid = 1
@@ -94,6 +95,7 @@ let CLIO_opposingparty = 30
 let CLIO_opposingaddress = 35
 let CLIO_opposingpartyphonenumber = 33
 let CLIO_familycourtnumber = 31
+let CLIO_opposingcounsel = 40
 
 let CLIO_contact_name = 1
 let CLIO_contact_phonenumber = 2

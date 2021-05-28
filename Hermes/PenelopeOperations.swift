@@ -181,7 +181,7 @@ func writePenelopeServiceFile( fromClioMatters: [ClioMatter] )
         }
         let DOB : String = df.string(from: matter.OpposingPartyDOB )
         
-        let userDefinedMemo2: String = "Family Court Number: " + matter.FamilyCourtNumber + " Family Case Number: " + matter.FamilyCaseNumber + " Opposing Party: " + matter.OpposingParty + " Opposing Party Address: " + matter.OpposingPartyAddress + " Opposing Party Phone: " + phone + " Opposing Party DOB: " + DOB
+        let userDefinedMemo2: String = "Family Court Number: " + matter.FamilyCourtNumber + " Family Case Number: " + matter.FamilyCaseNumber + " Opposing Party: " + matter.OpposingParty + " Opposing Party Address: " + matter.OpposingPartyAddress + " Opposing Party Phone: " + phone + " Opposing Party DOB: " + DOB + " Opposing Counsel: " + matter.OpposingCounsel
         
         
         
@@ -429,11 +429,13 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
     print("Number of unique clients is \(personDict.count)")
     var count : Int = 0
     
+    let df = DateFormatter()
+    df.dateFormat = "yyyy-MM-dd"
+    
     var demographicCount : Int = 0
     for person in personDict.values
     {
-        let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd"
+
         
         let clientID : String = String(person.ClientID)
         
@@ -459,10 +461,28 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
             name = "FNU"
         }
         
-        name = String( name.prefix(24) )
-        lastName = String( lastName.prefix(24) )
+        name = String( name.prefix( 24 ) )
+        lastName = String( lastName.prefix( 24 ) )
         
-        let birthDate : String = df.string(from: findClientContactEntry(who: person.ClientID).BirthDate)
+        var birthDate : String = ""
+            
+        if( findClientContactEntry(who: person.ClientID).BirthDateFound == true )
+        {
+            birthDate = df.string( from: findClientContactEntry(who: person.ClientID).BirthDate )
+        }
+        else
+        {
+            let result = findClientBirthDay( who: person.ClientID )
+            
+            if( result.0 == true )
+            {
+                birthDate = df.string( from: result.1 )
+            }
+            else
+            {
+                birthDate = ""
+            }
+        }
         
         let siteName : String = MapQ1842( from: person.q1842 )
         var referral : String = "ERROR"
@@ -596,7 +616,27 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
                 name = "FNU"
             }
             
-            let output : String = String(clientEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Outreach" + "," + " " + "," + " " + "," + " "
+            var birthDate : String = ""
+                
+            if( findClientContactEntry(who: clientEntry.ClientID).BirthDateFound == true )
+            {
+                birthDate = df.string( from: findClientContactEntry(who: clientEntry.ClientID).BirthDate )
+            }
+            else
+            {
+                let result = findClientBirthDay( who: clientEntry.ClientID )
+              
+                if( result.0 == true )
+                {
+                    birthDate = df.string( from: result.1 )
+                }
+                else
+                {
+                    birthDate = ""
+                }
+            }
+            
+            let output : String = String(clientEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + birthDate + "," + "Outreach" + "," + " " + "," + " " + "," + " "
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
             fileStreamer.write( output )
@@ -634,9 +674,28 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
                 name = "FNU"
             }
             
+            var birthDate : String = ""
+                
+            if( findClientContactEntry(who: cisEntry.ClientID).BirthDateFound == true )
+            {
+                birthDate = df.string( from: findClientContactEntry(who: cisEntry.ClientID).BirthDate )
+            }
+            else
+            {
+                let result = findClientBirthDay( who: cisEntry.ClientID )
+                if( result.0 == true )
+                {
+                    birthDate = df.string( from: result.1 )
+                }
+                else
+                {
+                    birthDate = ""
+                }
+            }
+            
             let gender : String = MapGender( from: cisEntry.Gender)
             
-            let output : String = String(cisEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + gender + "," + " " + "," + "Outreach" + "," + " " + "," + " " + "," + " "
+            let output : String = String(cisEntry.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + gender + "," + birthDate + "," + "Outreach" + "," + " " + "," + " " + "," + " "
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
             fileStreamer.write( output )
@@ -675,8 +734,26 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
                 name = "FNU"
             }
             
+            var birthDate : String = ""
+                
+            if( findClientContactEntry(who: hotline.ClientID).BirthDateFound == true )
+            {
+                birthDate = df.string( from: findClientContactEntry(who: hotline.ClientID).BirthDate )
+            }
+            else
+            {
+                let result = findClientBirthDay( who: hotline.ClientID )
+                if( result.0 == true )
+                {
+                    birthDate = df.string( from: result.1 )
+                }
+                else
+                {
+                    birthDate = ""
+                }
+            }
             
-            let output : String = String(hotline.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Shelter" + "," + " " + "," + " " + "," + " "
+            let output : String = String(hotline.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + birthDate + "," + "Shelter" + "," + " " + "," + " " + "," + " "
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
             fileStreamer.write( output )
@@ -719,7 +796,7 @@ func writePenelopeIndividualsFile( fromContacts : [TitaniumClientContact] , from
             
             let language = MapQ1847( language: person.Language )
             
-            let output : String = String(person.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Outreach" + "," + " " + "," + " " + "," + " "
+            let output : String = String(person.ClientID) + "," + name + "," + " " + "," + lastName + " , " + " " + "," + "Female" + "," + " " + "," + "Outreach" + "," + language + "," + " " + "," + " "
                 + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + language + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + ",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\",\"" + " " +  "\",\"" + " " + "\",\"" + " " + "\",\"" + " " + "\"," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "\n"
             
             fileStreamer.write( output )

@@ -176,6 +176,8 @@ func MapQ1847( language : String ) -> String
     switch language{
     case "English": return "English"
     case "Spanish": return "Spanish"
+    case "English ": return "English"
+    case "Spanish ": return "Spanish"
     case "Both (English & Spanish)": return "English"
     case "Both (English/Spanish)": return "English"
     case "Other": return "Other (indicate in notes)"

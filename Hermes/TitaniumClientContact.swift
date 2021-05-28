@@ -33,6 +33,7 @@ struct TitaniumClientContact
     var Address2 : String
     var Address3 : String
     var BirthDate : Date
+    var BirthDateFound : Bool
     var OkToHome : Bool
     var Comment : String
     var FromWeb : Bool
@@ -57,6 +58,7 @@ struct TitaniumClientContact
         Address2 = ""
         Address3 = ""
         BirthDate = Date()
+        BirthDateFound = false
         Comment = ""
         FromWeb = false
         OkToEmail = false

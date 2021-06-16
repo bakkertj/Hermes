@@ -117,6 +117,27 @@ for file in titaniumFiles
     readTitaniumHotlineCSV( fileName:file )
 }
 
+titaniumFiles.removeAll()
+titaniumDirectory.path = titaniumOption + "/AdultShelter"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    print ("Reading shelter")
+    readTitaniumAdultShelterCSV( fileName:file )
+}
+
+titaniumFiles.removeAll()
+titaniumDirectory.path = titaniumOption + "/ChildShelter"
+getFilesFromDirectory(directory:titaniumDirectory,  fileList:&titaniumFiles )
+
+for file in titaniumFiles
+{
+    print ("Reading shelter")
+    readTitaniumChildShelterCSV( fileName:file )
+}
+
+
 clioFiles.removeAll()
 
 clioDirectory.path = clioOption + "/contacts"
@@ -138,7 +159,7 @@ for file in clioFiles
 }
 
 
-writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray, fromClio: ClioContactArray  )
+writePenelopeIndividualsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray, fromClio: ClioContactArray, fromAdultShelter: TitaniumAdultShelterArray, fromChildShelter: TitaniumChildShelterArray  )
 
 writePenelopeContactsFile( fromContacts: TitaniumClientContactArray, fromDemographics: TitaniumDemographicArray, fromCIS: TitaniumCISArray, fromHotline: TitaniumHotlineArray, fromClio: ClioContactArray )
 

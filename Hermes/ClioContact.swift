@@ -24,6 +24,8 @@ struct ClioContact
     var Language : String
     var Race : String
     var Email : String
+    var BirthDate : Date
+    var BirthDateFound : Bool
     
     init ()
     {
@@ -39,6 +41,8 @@ struct ClioContact
         Language = "CLIO CONTACT ERROR"
         Race = "CLIO CONTACT ERROR"
         Email = ""
+        BirthDate = Date()
+        BirthDateFound = false
     }
     
 }

@@ -367,5 +367,103 @@ func generateTitaniumDefines(fileName: URL)
     }
 }
 
+func readTitaniumAdultShelterCSV(fileName: URL)
+{
+    var data : String = ""
+    
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd"
+    dateFormatterGet.locale = Locale(identifier: "en_US")
+  
+    do
+    {
+        data = try String(contentsOf: fileName, encoding: .utf8)
+    }
+    catch
+    {
+        print("Error opening file \(fileName.path)")
+    }
+    
+    
+    let rows = data.components(separatedBy: "\n")
+    var headerRead : Bool = false
+    
+    var rowCount : Int = 0
+    
+    for row in rows
+    {
+        if( headerRead == true )
+        {
+            let columns = row.components(separatedBy: ",")
+            var adultShelterEntry = TitaniumAdultShelter()
+            adultShelterEntry.ClientID   = Int(columns[TITANIUM_shelter_clientid])!
+            adultShelterEntry.Email      = columns[TITANIUM_shelter_email]
+            adultShelterEntry.FirstName  = columns[TITANIUM_shelter_fname]
+            adultShelterEntry.MiddleName = columns[TITANIUM_shelter_mname]
+            adultShelterEntry.LastName   = columns[TITANIUM_shelter_lname]
+            adultShelterEntry.q1480      = columns[TITANIUM_shelter_q1480]
+            adultShelterEntry.q1482      = columns[TITANIUM_shelter_q1482]
+            adultShelterEntry.q1484      = columns[TITANIUM_shelter_q1484]
+            adultShelterEntry.q1487      = columns[TITANIUM_shelter_q1487]
+            adultShelterEntry.q1488      = columns[TITANIUM_shelter_q1488]
+            adultShelterEntry.q1489      = columns[TITANIUM_shelter_q1489]
+            adultShelterEntry.q1490      = columns[TITANIUM_shelter_q1490]
+            adultShelterEntry.q1491      = columns[TITANIUM_shelter_q1491]
+            adultShelterEntry.q1493      = columns[TITANIUM_shelter_q1493]
+            adultShelterEntry.q1571      = columns[TITANIUM_shelter_q1480]
+            
+            TitaniumAdultShelterArray.append( adultShelterEntry )
+        }
+        headerRead = true;
+        rowCount += 1
+    }
+}
+
+func readTitaniumChildShelterCSV(fileName: URL)
+{
+    var data : String = ""
+    
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd"
+    dateFormatterGet.locale = Locale(identifier: "en_US")
+  
+    do
+    {
+        data = try String(contentsOf: fileName, encoding: .utf8)
+    }
+    catch
+    {
+        print("Error opening file \(fileName.path)")
+    }
+    
+    
+    let rows = data.components(separatedBy: "\n")
+    var headerRead : Bool = false
+    
+    var rowCount : Int = 0
+    
+    for row in rows
+    {
+        if( headerRead == true )
+        {
+            let columns = row.components(separatedBy: ",")
+            var childShelterEntry = TitaniumChildShelter()
+            childShelterEntry.ClientID   = Int(columns[TITANIUM_shelter_clientid])!
+            childShelterEntry.Email      = columns[TITANIUM_shelter_email]
+            childShelterEntry.FirstName  = columns[TITANIUM_shelter_fname]
+            childShelterEntry.MiddleName = columns[TITANIUM_shelter_mname]
+            childShelterEntry.LastName   = columns[TITANIUM_shelter_lname]
+            childShelterEntry.q1480      = columns[10]
+            childShelterEntry.q1482      = columns[11]
+            childShelterEntry.q1484      = columns[13]
+            
+            TitaniumChildShelterArray.append( childShelterEntry )
+        }
+        headerRead = true;
+        rowCount += 1
+    }
+}
+
+
 
 

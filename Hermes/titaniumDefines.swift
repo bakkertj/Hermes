@@ -110,4 +110,21 @@ let CLIO_contact_clientid = 10
 let CLIO_contact_immigration = 11
 let CLIO_contact_language = 12
 let CLIO_contact_race = 13
+let CLIO_contact_dob = 14
+
+let TITANIUM_shelter_clientid = 0
+let TITANIUM_shelter_fname = 5
+let TITANIUM_shelter_mname = 6
+let TITANIUM_shelter_lname = 7
+let TITANIUM_shelter_email = 8
+let TITANIUM_shelter_q1480 = 9
+let TITANIUM_shelter_q1482 = 10
+let TITANIUM_shelter_q1484 = 12
+let TITANIUM_shelter_q1487 = 15
+let TITANIUM_shelter_q1488 = 16
+let TITANIUM_shelter_q1489 = 17
+let TITANIUM_shelter_q1490 = 18
+let TITANIUM_shelter_q1491 = 19
+let TITANIUM_shelter_q1493 = 21
+let TITANIUM_shelter_q1571 = 24
 

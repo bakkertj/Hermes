@@ -53,6 +53,14 @@ func readClioContactsCSV(fileName: URL)
             clioContact.Language = columns[CLIO_contact_language]
             clioContact.Race = columns[CLIO_contact_race]
             clioContact.Email = columns[CLIO_contact_email]
+            
+            if( columns[CLIO_contact_dob] != "" && columns[CLIO_contact_dob] != " " && columns[CLIO_contact_dob] != "\r" )
+            {
+                clioContact.BirthDate = dateFormatterGet.date(from:columns[CLIO_contact_dob])!
+                clioContact.BirthDateFound = true
+            }
+            
+            
 
             ClioContactArray.append(clioContact)
         }

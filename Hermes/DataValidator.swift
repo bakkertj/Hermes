@@ -67,7 +67,7 @@ func MapQ1842( from: String ) -> String
     case "OR Childcare" : return "Outreach"
     case "No Response": return "Outreach"
     case "<No Response>": return "Outreach"
-    default: return "ERROR: \(from)"
+    default: return ""
     }
 }
 
@@ -282,8 +282,11 @@ func MapQ1844( titanium : String ) -> String
     case "Black" : return "African American/Black"
     case "Hispanic" : return "Hispanic/Latino"
     case "Asian/Pacific American": return "Asian/Pacific American"
+    case "Asian American / Pacific Islander":return "Asian/Pacific American"
     case "2 or more races" : return "2 or more races"
     case "Native American": return "Native American"
+    case "More than one ethnicity": return "2 or more races"
+    case "More than one ethnicity ": return "2 or more races"
     case "No Response": return ""
     case "<No Response>": return ""
     case "" : return ""
